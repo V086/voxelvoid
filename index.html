@@ -77,7 +77,6 @@ canvas{display:block}
 .head h2{font-size:13px}
 .head .step{font-size:9px;color:var(--ink-dim);font-family:"Press Start 2P",monospace}
 .spacer{flex:1}
-.hint{color:var(--ink-dim);font-size:12px;max-width:65ch;text-align:center}
 
 .factions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(960px,100%)}
 .fcard{padding:0;cursor:pointer;text-align:left;overflow:hidden}
@@ -92,7 +91,6 @@ canvas{display:block}
 .stage{position:relative;min-height:220px;display:flex;align-items:center;justify-content:center;
   background:radial-gradient(120% 100% at 50% 0%, #242b63 0%, #10122c 55%, #08091a 100%)}
 .stage canvas{width:100%;height:100%}
-.stage .note{position:absolute;bottom:6px;left:0;right:0;text-align:center;font-size:9px;color:#7b84b8}
 .pane{padding:10px 14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;max-height:72vh}
 .row label{display:block;font-size:9px;font-family:"Press Start 2P",monospace;color:var(--ink-dim);margin-bottom:6px}
 .swatches,.opts{display:flex;flex-wrap:wrap;gap:6px}
@@ -117,34 +115,59 @@ input[type=text]{width:100%;background:#0e1030;border:2px solid #000;color:var(-
 .mcard h3{font-size:10px;margin-bottom:6px;color:var(--gold)}
 .mcard p{font-size:11px;color:#c2c9ef;line-height:1.4}
 
-/* HUD */
+/* HUD & CONTROLES RETRO */
 #hud{position:fixed;inset:0;z-index:3;display:none;pointer-events:none}
 #hud.on{display:block}
-.hbars{position:absolute;left:14px;bottom:14px;width:180px}
-.hbars .lbl{font-family:"Press Start 2P",monospace;font-size:7px;color:var(--ink-dim);margin-bottom:2px}
-.hbars .bar{height:10px;margin-bottom:4px}
+.hbars{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);width:180px;pointer-events:none}
+.hbars .lbl{font-family:"Press Start 2P",monospace;font-size:7px;color:var(--ink-dim);margin-bottom:2px;text-align:center}
+.hbars .bar{height:9px;margin-bottom:4px}
 #bHull i{background:var(--mycor)}
 #bShield i{background:var(--zylith)}
 
-.touch-btn{position:absolute;pointer-events:auto;background:var(--panel-hi);border:2px solid #000;
-  color:#fff;font-family:"Press Start 2P",monospace;display:flex;align-items:center;justify-content:center;
-  box-shadow:inset 0 2px 0 rgba(255,255,255,.2), 2px 2px 0 #000}
-.touch-btn:active{transform:scale(0.92);background:#3b4392}
-#tFire{right:16px;bottom:16px;width:80px;height:80px;border-radius:50%;background:var(--danger);font-size:10px}
-#tBoost{left:16px;bottom:16px;width:68px;height:68px;border-radius:50%;background:#383218;border-color:var(--gold);color:var(--gold);font-size:9px}
-#abBox{right:16px;bottom:106px;width:68px;height:52px;background:#12153a;border:2px solid #000;font-size:8px;flex-direction:column;gap:2px}
-#abBox .k{color:var(--gold);font-size:8px}
-#tCalibrate{left:14px;top:14px;font-size:7px;padding:6px 8px;background:rgba(18,21,58,0.85)}
-#tQuit{right:14px;top:14px;font-size:8px;padding:6px 10px}
+/* CRUCETA VIRTUAL (IZQUIERDA) */
+.dpad-container{
+  position:absolute;left:24px;bottom:24px;width:144px;height:144px;
+  pointer-events:auto;
+}
+.dpad-btn{
+  position:absolute;width:48px;height:48px;background:rgba(27,31,66,0.85);border:3px solid #000;
+  color:var(--ink);font-family:"Press Start 2P",monospace;font-size:14px;
+  display:flex;align-items:center;justify-content:center;box-shadow:inset 0 2px 0 rgba(255,255,255,0.2), 3px 3px 0 #000;
+}
+.dpad-btn:active, .dpad-btn.pressed{background:var(--f);color:#0b0b1a;transform:scale(0.95);box-shadow:none}
+#dpUp{top:0;left:48px;border-radius:6px 6px 0 0}
+#dpDown{bottom:0;left:48px;border-radius:0 0 6px 6px}
+#dpLeft{top:48px;left:0;border-radius:6px 0 0 6px}
+#dpRight{top:48px;right:0;border-radius:0 6px 6px 0}
+.dpad-center{position:absolute;top:48px;left:48px;width:48px;height:48px;background:#151833;border:1px solid #000}
+
+/* BOTONERA ACCIONES (DERECHA) */
+.action-container{
+  position:absolute;right:24px;bottom:24px;width:150px;height:150px;
+  pointer-events:auto;
+}
+.act-btn{
+  position:absolute;border-radius:50%;border:3px solid #000;color:#fff;
+  font-family:"Press Start 2P",monospace;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  box-shadow:inset 0 3px 0 rgba(255,255,255,0.25), 3px 3px 0 #000;
+}
+.act-btn:active, .act-btn.pressed{transform:scale(0.92);box-shadow:none}
+
+#btnFire{right:0;bottom:30px;width:66px;height:66px;background:var(--danger);font-size:9px}
+#btnBoost{left:10px;bottom:0;width:56px;height:56px;background:#c29015;font-size:8px}
+#btnSpecial{top:0;left:35px;width:56px;height:56px;background:#2b3168;border-color:var(--gold);color:var(--gold);font-size:8px}
+
+#tQuit{position:absolute;right:16px;top:16px;font-size:8px;padding:6px 10px;pointer-events:auto;background:rgba(27,31,66,0.85);border:2px solid #000;color:#fff;font-family:"Press Start 2P",monospace}
 
 .objective{position:absolute;top:10px;left:50%;transform:translateX(-50%);text-align:center;
-  background:rgba(9,11,32,.85);border:2px solid #000;padding:4px 12px}
+  background:rgba(9,11,32,.85);border:2px solid #000;padding:4px 12px;pointer-events:none}
 .objective .t{font-family:"Press Start 2P",monospace;font-size:8px;color:var(--gold)}
 .objective .s{font-size:10px;color:#cdd4f7}
-.crosshair{position:absolute;left:50%;top:50%;width:20px;height:20px;transform:translate(-50%,-50%);pointer-events:none}
+.crosshair{position:absolute;left:50%;top:46%;width:22px;height:22px;transform:translate(-50%,-50%);pointer-events:none}
 .crosshair::before,.crosshair::after{content:"";position:absolute;background:rgba(255,255,255,.75)}
-.crosshair::before{left:8px;top:0;width:4px;height:20px}
-.crosshair::after{top:8px;left:0;height:4px;width:20px}
+.crosshair::before{left:9px;top:0;width:4px;height:22px}
+.crosshair::after{top:9px;left:0;height:4px;width:22px}
 .marker{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border:2px solid var(--danger);display:none;pointer-events:none}
 .marker.pick{border-color:var(--gold)}
 .marker.ally{border-color:var(--mycor)}
@@ -165,19 +188,33 @@ input[type=text]{width:100%;background:#0e1030;border:2px solid #000;color:var(-
 <div id="toast" class="toast"></div>
 
 <div id="hud">
-  <button id="tCalibrate" class="touch-btn">CALIBRAR CENTRO</button>
-  <button id="tQuit" class="touch-btn">X</button>
+  <button id="tQuit">X</button>
+  
   <div class="objective"><div class="t" id="objT">OBJETIVO</div><div class="s" id="objS"></div></div>
   <div class="crosshair"></div>
+  
   <div class="hbars">
     <div class="lbl">CASCO <span id="hullTxt"></span></div>
     <div class="bar" id="bHull"><i></i></div>
     <div class="lbl">ESCUDO <span id="shTxt"></span></div>
     <div class="bar" id="bShield"><i></i></div>
   </div>
-  <div id="abBox" class="touch-btn"><div class="k">PODER</div><div id="abName"></div></div>
-  <div id="tBoost" class="touch-btn">TURBO</div>
-  <div id="tFire" class="touch-btn">FUEGO</div>
+
+  <!-- CRUCETA IZQUIERDA -->
+  <div class="dpad-container">
+    <div class="dpad-center"></div>
+    <div class="dpad-btn" id="dpUp">▲</div>
+    <div class="dpad-btn" id="dpDown">▼</div>
+    <div class="dpad-btn" id="dpLeft">◄</div>
+    <div class="dpad-btn" id="dpRight">►</div>
+  </div>
+
+  <!-- BOTONES DERECHA -->
+  <div class="action-container">
+    <div class="act-btn" id="btnSpecial">PODER</div>
+    <div class="act-btn" id="btnBoost">TURBO</div>
+    <div class="act-btn" id="btnFire">FUEGO</div>
+  </div>
 </div>
 
 <div id="app">
@@ -185,8 +222,8 @@ input[type=text]{width:100%;background:#0e1030;border:2px solid #000;color:var(-
   <section class="screen on" id="scTitle">
     <div id="title">
       <div class="mark px"><span>VOXEL</span> <span>VOID</span></div>
-      <div class="sub px">Combate Espacial Giroscópico</div>
-      <p>Controla la nave inclinando el teléfono en horizontal. Pulsa fuego para disparar.</p>
+      <div class="sub px">Arcade Retro Espacial</div>
+      <p>Cruceta a la izquierda para pilotar. Botonera a la derecha para combatir.</p>
       <div class="menu">
         <button class="btn primary" data-go="faction">Iniciar</button>
         <button class="btn" data-go="faction" data-quick="1">Combate Rápido</button>
@@ -268,18 +305,18 @@ input[type=text]{width:100%;background:#0e1030;border:2px solid #000;color:var(-
 
 const FACTIONS = {
   krovax:{ id:'krovax', name:'KROVAX', crest:'⛰', desc:'Acorazados y potentes.', css:'#ff6b2b', hex:0xff6b2b, hex2:0x4a1f14, hex3:0xffb03a,
-    mods:{casco:1.2, escudo:0.8, dano:1.1, vel:0.92, giro:0.88}, ability:{name:'EMBESTIDA', short:'EMBESTIDA', cd:10}, strong:'mycor', weak:'zylith' },
+    mods:{casco:1.2, escudo:0.8, dano:1.1, vel:0.95, giro:0.92}, ability:{name:'EMBESTIDA', cd:10}, strong:'mycor', weak:'zylith' },
   zylith:{ id:'zylith', name:'ZYLITH', crest:'◈', desc:'Escudos altos y veloces.', css:'#2fd4ff', hex:0x2fd4ff, hex2:0x13315c, hex3:0xffffff,
-    mods:{casco:0.9, escudo:1.35, dano:1.0, vel:1.08, giro:1.08}, ability:{name:'PULSO', short:'PULSO', cd:9}, strong:'krovax', weak:'mycor' },
+    mods:{casco:0.9, escudo:1.35, dano:1.0, vel:1.08, giro:1.08}, ability:{name:'PULSO', cd:9}, strong:'krovax', weak:'mycor' },
   mycor:{ id:'mycor', name:'MYCOR', crest:'❦', desc:'Regeneración y agilidad.', css:'#8bf03a', hex:0x8bf03a, hex2:0x1e3a1a, hex3:0xe6ff9b,
-    mods:{casco:1.05, escudo:1.0, dano:0.95, vel:1.05, giro:1.02}, ability:{name:'CURA', short:'CURA', cd:11}, strong:'zylith', weak:'krovax' }
+    mods:{casco:1.05, escudo:1.0, dano:0.95, vel:1.05, giro:1.02}, ability:{name:'CURA', cd:11}, strong:'zylith', weak:'krovax' }
 };
 const FKEYS = ['krovax','zylith','mycor'];
 
 const HULLS = {
-  escarabajo:{ id:'escarabajo', name:'ESCARABAJO', role:'Balance', base:{vel:26, giro:1.4, dano:12, cad:3.2, casco:130, escudo:60}, energia:100 },
-  martillo:{ id:'martillo', name:'MARTILLO', role:'Pesada', base:{vel:20, giro:1.1, dano:16, cad:2.2, casco:190, escudo:45}, energia:110 },
-  aguja:{ id:'aguja', name:'AGUJA', role:'Rápida', base:{vel:33, giro:1.8, dano:9, cad:4.8, casco:90, escudo:70}, energia:90 }
+  escarabajo:{ id:'escarabajo', name:'ESCARABAJO', role:'Balance', base:{vel:27, giro:1.5, dano:12, cad:3.4, casco:130, escudo:60} },
+  martillo:{ id:'martillo', name:'MARTILLO', role:'Pesada', base:{vel:21, giro:1.15, dano:16, cad:2.2, casco:190, escudo:45} },
+  aguja:{ id:'aguja', name:'AGUJA', role:'Rápida', base:{vel:34, giro:1.9, dano:9, cad:4.8, casco:90, escudo:70} }
 };
 const HKEYS = ['escarabajo','martillo','aguja'];
 
@@ -289,11 +326,11 @@ const HELM_TYPES = [{id:0,n:'Abierto'},{id:1,n:'Completo'},{id:2,n:'Cresta'}];
 
 const MODES = [
   {id:'historia', n:'Campaña', d:'Recoge 5 núcleos y abate al jefe.'},
-  {id:'1v1', n:'Duelo 1v1', d:'Combate frente a frente.'},
-  {id:'2v2', n:'Escuadrón 2v2', d:'Vuela con un aliado.'}
+  {id:'1v1', n:'Duelo 1v1', d:'Combate individual directo.'},
+  {id:'2v2', n:'Escuadrón 2v2', d:'Vuela con un compañero.'}
 ];
 
-const S = { faction:null, pilot:{name:'PILOTO', skin:0, helm:0, helmType:1}, ship:{hull:'escarabajo', mods:[]}, mode:'1v1', screen:'title' };
+const S = { faction:null, pilot:{name:'PILOTO', skin:0, helm:0, helmType:1}, ship:{hull:'escarabajo'}, mode:'1v1', screen:'title' };
 const $ = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
 const clamp = (v,a,b)=>Math.max(a,Math.min(b,v));
@@ -348,7 +385,7 @@ function buildHead(p, fid){
 
 function buildShip(hullId, fid, scale){
   const g=new THREE.Group(), f=FACTIONS[fid]||FACTIONS.zylith;
-  const A=f.hex, B=f.hex2, C=f.hex3, DK=0x1a1c2e, GL=0x88eeff;
+  const A=f.hex, B=f.hex2, C=f.hex3, GL=0x88eeff;
   if(hullId==='escarabajo'){
     box(g,0,0,0.2,1.2,0.5,2.6,A);
     box(g,0,0.35,0,0.8,0.3,1.4,B);
@@ -452,79 +489,28 @@ function renderModes(){
   MODES.forEach(m=>{
     const d=document.createElement('div'); d.className='blk mcard';
     d.innerHTML=`<h3>${m.n}</h3><p>${m.d}</p>`;
-    d.addEventListener('click',()=>{ S.mode=m.id; checkSensorPermission(); });
+    d.addEventListener('click',()=>{ S.mode=m.id; startBattle(); });
     el.appendChild(d);
   });
 }
 
 /* ============================================================
-   GIROSCOPIO HORIZONTAL REFINADO
-============================================================ */
-const GYRO = {
-  active:false,
-  baseBeta:0,      // Ángulo de inclinación cómodo del usuario
-  baseGamma:45,
-  targetYaw:0,
-  targetPitch:0,
-  curYaw:0,
-  curPitch:0
-};
-
-function initSensors(){
-  if(window.DeviceOrientationEvent){
-    window.addEventListener('deviceorientation', e=>{
-      if(e.beta===null || e.gamma===null) return;
-      GYRO.active=true;
-
-      // En apaisado horizontal con el teléfono frente a los ojos:
-      // - Inclinación hacia adelante / atrás (cabeceo) afecta principalmente a 'gamma'.
-      // - Giro hacia izquierda / derecha (guiñada) afecta a 'beta'.
-      const isLandscapeLeft = window.orientation === 90;
-      const rawPitch = isLandscapeLeft ? e.gamma : -e.gamma;
-      const rawYaw   = isLandscapeLeft ? e.beta  : -e.beta;
-
-      const dPitch = rawPitch - GYRO.baseGamma;
-      const dYaw   = rawYaw   - GYRO.baseBeta;
-
-      // ZONA MUERTA de 2.5 grados para filtrar temblores de las manos
-      const applyDeadzone = (val, maxAngle) => {
-        if(Math.abs(val) < 2.5) return 0;
-        return clamp((val - Math.sign(val)*2.5) / maxAngle, -1, 1);
-      };
-
-      // Sensibilidad reducida a 35 grados de recorrido máximo
-      GYRO.targetPitch = applyDeadzone(dPitch, 35);
-      GYRO.targetYaw   = applyDeadzone(-dYaw, 35);
-    }, false);
-  }
-}
-
-function calibrateGyro(){
-  // Toma la postura actual como punto cero absoluto
-  const isLandscapeLeft = window.orientation === 90;
-  // Guardamos una estimación neutral según la posición actual
-  toast('CENTRO CALIBRADO');
-}
-
-function checkSensorPermission(){
-  if(typeof DeviceOrientationEvent!=='undefined' && typeof DeviceOrientationEvent.requestPermission==='function'){
-    DeviceOrientationEvent.requestPermission()
-      .then(resp=>{ if(resp==='granted') initSensors(); startBattle(); })
-      .catch(()=>startBattle());
-  } else {
-    initSensors();
-    startBattle();
-  }
-}
-
-/* ============================================================
-   COMBATE Y CÁMARA
+   COMBATE CON CRUCETA RETRO (D-PAD)
 ============================================================ */
 const G = {
   renderer:null, scene:null, cam:null, clock:null,
   player:null, actors:[], bullets:[], parts:[], pickups:[], markers:[],
   running:false, over:false, kills:0, cores:0, coresNeeded:5, bossUp:false,
-  touchBoost:false, firing:false
+  keys:{},
+  // Entrada de la cruceta y botones
+  input:{
+    up:false,
+    down:false,
+    left:false,
+    right:false,
+    fire:false,
+    boost:false
+  }
 };
 
 const UP = new THREE.Vector3(0,1,0);
@@ -597,7 +583,7 @@ function fire(a){
     m.position.copy(a.obj.position).add(side).add(dir.clone().multiplyScalar(2));
     m.quaternion.copy(a.obj.quaternion);
     G.scene.add(m);
-    G.bullets.push({obj:m, v:dir.clone().multiplyScalar(200), life:2.2, dmg, team:a.team, from:a.faction});
+    G.bullets.push({obj:m, v:dir.clone().multiplyScalar(210), life:2.2, dmg, team:a.team, from:a.faction});
   });
 }
 
@@ -628,26 +614,37 @@ function damage(a, val){
 }
 
 function playerUpdate(a, dt){
-  // Suavizado exponencial (Damping) para evitar giros bruscos
-  const smooth = 4.0 * dt;
-  GYRO.curYaw   += (GYRO.targetYaw   - GYRO.curYaw)   * clamp(smooth,0,1);
-  GYRO.curPitch += (GYRO.targetPitch - GYRO.curPitch) * clamp(smooth,0,1);
+  const inp=G.input;
+  const k=G.keys;
 
-  // Giro suave con velocidad controlada
-  const rate = a.stats.giro * 0.8 * dt;
-  const qy = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0), GYRO.curYaw * rate);
-  const qx = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1,0,0), GYRO.curPitch * rate);
+  let yaw = 0;
+  let pitch = 0;
+
+  // Cruceta virtual o teclas WASD / Flechas
+  if(inp.left  || k['a'] || k['arrowleft'])  yaw += 1;
+  if(inp.right || k['d'] || k['arrowright']) yaw -= 1;
+  if(inp.up    || k['w'] || k['arrowup'])    pitch += 1;
+  if(inp.down  || k['s'] || k['arrowdown'])  pitch -= 1;
+
+  // Giro suave con respuesta directa de cruceta
+  const rate = a.stats.giro * dt * 1.6;
+  const qy = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0), yaw * rate);
+  const qx = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1,0,0), pitch * rate);
   a.obj.quaternion.multiply(qy).multiply(qx);
 
-  const sp = a.speed * (G.touchBoost ? 1.8 : 1.0);
+  const boosting = inp.boost || k['shift'];
+  const sp = a.speed * (boosting ? 1.9 : 1.0);
   const fwd = new THREE.Vector3(0,0,1).applyQuaternion(a.obj.quaternion);
   a.obj.position.add(fwd.multiplyScalar(sp*dt));
 
-  // Alabeo estético
-  a.mesh.rotation.z = THREE.MathUtils.lerp(a.mesh.rotation.z, -GYRO.curYaw * 0.5, dt * 5);
+  // Inclinación visual (Roll) al girar hacia los lados
+  a.mesh.rotation.z = THREE.MathUtils.lerp(a.mesh.rotation.z, -yaw * 0.45, dt * 8);
 
   a.cool-=dt;
-  if(G.firing && a.cool<=0){ a.cool = 1/a.stats.cad; fire(a); }
+  if((inp.fire || k[' ']) && a.cool<=0){
+    a.cool = 1/a.stats.cad;
+    fire(a);
+  }
 
   // Recoger núcleos
   for(let i=G.pickups.length-1;i>=0;i--){
@@ -686,7 +683,7 @@ function startBattle(){
   G.renderer.setSize(innerWidth,innerHeight,false);
   G.scene=new THREE.Scene();
 
-  // Cámara con FOV amplio para vista panorámica horizontal
+  // Cámara centrada en perspectiva
   G.cam=new THREE.PerspectiveCamera(55, innerWidth/innerHeight, 0.5, 3000);
   G.clock=new THREE.Clock();
   G.actors=[]; G.bullets=[]; G.parts=[]; G.pickups=[];
@@ -694,7 +691,7 @@ function startBattle(){
 
   buildSpaceWorld();
 
-  // El jugador se genera en posición neutra
+  // Nave del jugador
   G.player=makeActor({hull:S.ship.hull, faction:S.faction, pos:new THREE.Vector3(0,0,-80), team:1, isPlayer:true});
 
   if(S.mode==='historia'){
@@ -716,7 +713,6 @@ function startBattle(){
     $('#objT').textContent='DUELO';
   }
 
-  $('#abName').textContent=FACTIONS[S.faction].ability.short;
   G.running=true;
   requestAnimationFrame(frame);
 }
@@ -730,7 +726,7 @@ function frame(){
     if(a.dead) return;
     if(a.isPlayer) playerUpdate(a,dt);
     else {
-      // IA básica de persecución
+      // IA de persecución
       const toP=G.player.obj.position.clone().sub(a.obj.position);
       a.obj.quaternion.slerp(quatTowards(a.obj.position, G.player.obj.position), dt*1.2);
       a.obj.position.add(new THREE.Vector3(0,0,1).applyQuaternion(a.obj.quaternion).multiplyScalar(a.speed*0.8*dt));
@@ -761,17 +757,17 @@ function frame(){
   }
 
   // ============================================================
-  // CÁMARA CENTRADA (La nave siempre queda perfectamente visible)
+  // CÁMARA CENTRADA (Nave siempre en el medio exacto)
   // ============================================================
   const pl=G.player;
   if(pl && !pl.dead){
-    // Posicionada 4.5 unidades por encima y 18 unidades por detrás de la nave
-    const camOffset = new THREE.Vector3(0, 4.5, -18).applyQuaternion(pl.obj.quaternion);
+    // Elevación suave y distancia fija en el eje Z local
+    const camOffset = new THREE.Vector3(0, 4.0, -16).applyQuaternion(pl.obj.quaternion);
     const targetCamPos = pl.obj.position.clone().add(camOffset);
-    G.cam.position.lerp(targetCamPos, dt * 10);
+    G.cam.position.lerp(targetCamPos, dt * 12);
 
-    // El punto de mira apunta justo por encima del morro de la nave (crosshair frontal)
-    const lookTarget = pl.obj.position.clone().add(new THREE.Vector3(0, 1.2, 28).applyQuaternion(pl.obj.quaternion));
+    // Mirar hacia adelante sobre el morro de la nave
+    const lookTarget = pl.obj.position.clone().add(new THREE.Vector3(0, 1.2, 26).applyQuaternion(pl.obj.quaternion));
     G.cam.lookAt(lookTarget);
     G.cam.up.set(0,1,0).applyQuaternion(pl.obj.quaternion);
 
@@ -781,7 +777,7 @@ function frame(){
     $('#shTxt').textContent=Math.max(0,Math.round(pl.shield));
   }
 
-  // Actualizar marcadores
+  // Marcadores de enemigos y cristales
   const v=new THREE.Vector3();
   G.actors.concat(G.pickups).forEach(item=>{
     const m=item.marker; if(!m) return;
@@ -812,21 +808,49 @@ function endBattle(win){
   }, 1000);
 }
 
-/* EVENTOS TÁCTILES */
-$('#tFire').addEventListener('touchstart',e=>{e.preventDefault(); G.firing=true;},{passive:false});
-$('#tFire').addEventListener('touchend',()=>{G.firing=false;});
-$('#tBoost').addEventListener('touchstart',e=>{e.preventDefault(); G.touchBoost=true;},{passive:false});
-$('#tBoost').addEventListener('touchend',()=>{G.touchBoost=false;});
-$('#abBox').addEventListener('touchstart',e=>{
+/* ============================================================
+   ENLACE DE CONTROLES TÁCTILES (CRUCETA Y BOTONES)
+============================================================ */
+function bindTouchButton(elemId, keyName){
+  const el = $(elemId);
+  const setKey = (active)=>{
+    G.input[keyName] = active;
+    if(active) el.classList.add('pressed');
+    else el.classList.remove('pressed');
+  };
+
+  el.addEventListener('touchstart', e=>{ e.preventDefault(); setKey(true); }, {passive:false});
+  el.addEventListener('touchend',   e=>{ e.preventDefault(); setKey(false); }, {passive:false});
+  el.addEventListener('touchcancel',e=>{ e.preventDefault(); setKey(false); }, {passive:false});
+  
+  // Soporte ratón en PC para pruebas
+  el.addEventListener('mousedown', ()=>{ setKey(true); });
+  el.addEventListener('mouseup',   ()=>{ setKey(false); });
+  el.addEventListener('mouseleave',()=>{ setKey(false); });
+}
+
+bindTouchButton('#dpUp',    'up');
+bindTouchButton('#dpDown',  'down');
+bindTouchButton('#dpLeft',  'left');
+bindTouchButton('#dpRight', 'right');
+bindTouchButton('#btnFire', 'fire');
+bindTouchButton('#btnBoost','boost');
+
+// Botón de habilidad especial (Poder)
+$('#btnSpecial').addEventListener('touchstart', e=>{
   e.preventDefault();
   if(G.running && G.player && !G.player.dead){
-    G.player.hull = Math.min(G.player.hullMax, G.player.hull + 40);
-    toast('SISTEMAS REPARADOS');
+    G.player.hull = Math.min(G.player.hullMax, G.player.hull + 45);
+    G.player.shield = G.player.shieldMax;
+    toast('¡PODER ACTIVADO!');
   }
-},{passive:false});
-$('#tCalibrate').addEventListener('click', calibrateGyro);
-$('#tCalibrate').addEventListener('touchstart', e=>{ e.preventDefault(); calibrateGyro(); },{passive:false});
+}, {passive:false});
+
 $('#tQuit').addEventListener('click',()=>{ G.running=false; G.over=true; show('mode'); });
+
+// Soporte teclado físico (PC/Mac)
+addEventListener('keydown', e=>{ G.keys[e.key.toLowerCase()] = true; });
+addEventListener('keyup',   e=>{ G.keys[e.key.toLowerCase()] = false; });
 
 window.addEventListener('resize',()=>{
   if(G.renderer && G.cam){

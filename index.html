@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<title>VOXEL VOID — Guerra de las Tres Semillas</title>
+<title>VOXEL VOID</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Chakra+Petch:wght@400;600;700&display=swap" rel="stylesheet">
@@ -32,22 +32,15 @@ canvas{display:block}
 #bg{position:fixed;inset:0;z-index:0}
 #app{position:fixed;inset:0;z-index:2;display:flex;align-items:center;justify-content:center}
 
-/* Aviso para forzar modo horizontal */
 #rotateWarning{
   position:fixed;inset:0;z-index:9999;background:#0a0b1d;
   display:none;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;padding:24px;gap:16px;
 }
-#rotateWarning .icon{font-size:42px;animation:rotatePhone 2s infinite ease-in-out}
-#rotateWarning p{font-family:"Press Start 2P",monospace;font-size:12px;color:var(--gold);line-height:1.8}
-@keyframes rotatePhone{
-  0%,10%{transform:rotate(0deg)}
-  50%,60%{transform:rotate(-90deg)}
-  100%{transform:rotate(-90deg)}
-}
-@media (orientation: portrait){
-  #rotateWarning{display:flex}
-}
+#rotateWarning .icon{font-size:42px;animation:rot 2s infinite ease-in-out}
+#rotateWarning p{font-family:"Press Start 2P",monospace;font-size:11px;color:var(--gold);line-height:1.8}
+@keyframes rot{0%,10%{transform:rotate(0deg)}50%,60%{transform:rotate(-90deg)}100%{transform:rotate(-90deg)}}
+@media (orientation: portrait){#rotateWarning{display:flex}}
 
 .screen{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;
   padding:clamp(10px,2vw,24px);gap:12px;overflow-y:auto}
@@ -80,7 +73,7 @@ canvas{display:block}
 
 .factions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(960px,100%)}
 .fcard{padding:0;cursor:pointer;text-align:left;overflow:hidden}
-.fcard .crest{height:54px;display:flex;align-items:center;justify-content:center;font-size:32px;
+.fcard .crest{height:50px;display:flex;align-items:center;justify-content:center;font-size:28px;
   border-bottom:2px solid var(--line)}
 .fcard .body{padding:8px 10px}
 .fcard h3{font-size:11px;margin-bottom:4px}
@@ -88,7 +81,7 @@ canvas{display:block}
 .fcard.sel{outline:3px solid var(--gold);outline-offset:-3px}
 
 .editor{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:min(900px,100%);max-height:76vh}
-.stage{position:relative;min-height:220px;display:flex;align-items:center;justify-content:center;
+.stage{position:relative;min-height:200px;display:flex;align-items:center;justify-content:center;
   background:radial-gradient(120% 100% at 50% 0%, #242b63 0%, #10122c 55%, #08091a 100%)}
 .stage canvas{width:100%;height:100%}
 .pane{padding:10px 14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;max-height:72vh}
@@ -115,62 +108,66 @@ input[type=text]{width:100%;background:#0e1030;border:2px solid #000;color:var(-
 .mcard h3{font-size:10px;margin-bottom:6px;color:var(--gold)}
 .mcard p{font-size:11px;color:#c2c9ef;line-height:1.4}
 
-/* HUD & CONTROLES RETRO */
+/* HUD & JOYSTICK */
 #hud{position:fixed;inset:0;z-index:3;display:none;pointer-events:none}
 #hud.on{display:block}
-.hbars{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);width:180px;pointer-events:none}
+.hbars{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);width:180px;pointer-events:none}
 .hbars .lbl{font-family:"Press Start 2P",monospace;font-size:7px;color:var(--ink-dim);margin-bottom:2px;text-align:center}
-.hbars .bar{height:9px;margin-bottom:4px}
+.hbars .bar{height:8px;margin-bottom:3px}
 #bHull i{background:var(--mycor)}
 #bShield i{background:var(--zylith)}
 
-/* CRUCETA VIRTUAL (IZQUIERDA) */
-.dpad-container{
-  position:absolute;left:24px;bottom:24px;width:144px;height:144px;
-  pointer-events:auto;
+/* JOYSTICK TÁCTIL (IZQUIERDA) */
+#stickArea{
+  position:absolute;left:18px;bottom:18px;width:150px;height:150px;
+  pointer-events:auto;touch-action:none;
 }
-.dpad-btn{
-  position:absolute;width:48px;height:48px;background:rgba(27,31,66,0.85);border:3px solid #000;
-  color:var(--ink);font-family:"Press Start 2P",monospace;font-size:14px;
-  display:flex;align-items:center;justify-content:center;box-shadow:inset 0 2px 0 rgba(255,255,255,0.2), 3px 3px 0 #000;
+#stickBase{
+  position:absolute;inset:0;border-radius:50%;
+  background:rgba(20,24,55,0.65);border:3px solid rgba(255,255,255,0.25);
+  box-shadow:inset 0 0 16px rgba(0,0,0,0.6), 0 4px 10px rgba(0,0,0,0.5);
 }
-.dpad-btn:active, .dpad-btn.pressed{background:var(--f);color:#0b0b1a;transform:scale(0.95);box-shadow:none}
-#dpUp{top:0;left:48px;border-radius:6px 6px 0 0}
-#dpDown{bottom:0;left:48px;border-radius:0 0 6px 6px}
-#dpLeft{top:48px;left:0;border-radius:6px 0 0 6px}
-#dpRight{top:48px;right:0;border-radius:0 6px 6px 0}
-.dpad-center{position:absolute;top:48px;left:48px;width:48px;height:48px;background:#151833;border:1px solid #000}
+#stickKnob{
+  position:absolute;top:50%;left:50%;width:64px;height:64px;margin:-32px 0 0 -32px;
+  border-radius:50%;background:var(--panel-hi);border:3px solid var(--gold);
+  box-shadow:0 3px 6px rgba(0,0,0,0.6), inset 0 2px 0 rgba(255,255,255,0.3);
+  pointer-events:none;transform:translate3d(0,0,0);
+}
 
-/* BOTONERA ACCIONES (DERECHA) */
-.action-container{
-  position:absolute;right:24px;bottom:24px;width:150px;height:150px;
+/* BOTONERA ACCIÓN (DERECHA) */
+.action-box{
+  position:absolute;right:18px;bottom:18px;width:160px;height:150px;
   pointer-events:auto;
 }
-.act-btn{
+.btn-act{
   position:absolute;border-radius:50%;border:3px solid #000;color:#fff;
-  font-family:"Press Start 2P",monospace;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;text-align:center;
-  box-shadow:inset 0 3px 0 rgba(255,255,255,0.25), 3px 3px 0 #000;
+  font-family:"Press Start 2P",monospace;display:flex;align-items:center;justify-content:center;
+  box-shadow:inset 0 3px 0 rgba(255,255,255,0.3), 3px 3px 0 #000;touch-action:none;
 }
-.act-btn:active, .act-btn.pressed{transform:scale(0.92);box-shadow:none}
+.btn-act:active, .btn-act.down{transform:scale(0.92);box-shadow:none}
 
-#btnFire{right:0;bottom:30px;width:66px;height:66px;background:var(--danger);font-size:9px}
-#btnBoost{left:10px;bottom:0;width:56px;height:56px;background:#c29015;font-size:8px}
-#btnSpecial{top:0;left:35px;width:56px;height:56px;background:#2b3168;border-color:var(--gold);color:var(--gold);font-size:8px}
+#btnShoot{right:6px;bottom:26px;width:76px;height:76px;background:var(--danger);font-size:10px}
+#btnTurbo{left:6px;bottom:4px;width:54px;height:54px;background:#c29015;font-size:8px}
+#btnHeal{top:4px;left:42px;width:52px;height:52px;background:#2b3168;border-color:var(--gold);color:var(--gold);font-size:7px}
 
-#tQuit{position:absolute;right:16px;top:16px;font-size:8px;padding:6px 10px;pointer-events:auto;background:rgba(27,31,66,0.85);border:2px solid #000;color:#fff;font-family:"Press Start 2P",monospace}
+#tQuit{position:absolute;right:16px;top:16px;font-size:8px;padding:6px 10px;pointer-events:auto;
+  background:rgba(27,31,66,0.85);border:2px solid #000;color:#fff;font-family:"Press Start 2P",monospace}
 
 .objective{position:absolute;top:10px;left:50%;transform:translateX(-50%);text-align:center;
   background:rgba(9,11,32,.85);border:2px solid #000;padding:4px 12px;pointer-events:none}
 .objective .t{font-family:"Press Start 2P",monospace;font-size:8px;color:var(--gold)}
 .objective .s{font-size:10px;color:#cdd4f7}
-.crosshair{position:absolute;left:50%;top:46%;width:22px;height:22px;transform:translate(-50%,-50%);pointer-events:none}
-.crosshair::before,.crosshair::after{content:"";position:absolute;background:rgba(255,255,255,.75)}
-.crosshair::before{left:9px;top:0;width:4px;height:22px}
-.crosshair::after{top:9px;left:0;height:4px;width:22px}
+
+.crosshair{
+  position:absolute;left:50%;top:46%;width:24px;height:24px;
+  transform:translate(-50%,-50%);pointer-events:none;
+}
+.crosshair::before,.crosshair::after{content:"";position:absolute;background:rgba(255,255,255,0.85)}
+.crosshair::before{left:10px;top:0;width:4px;height:24px}
+.crosshair::after{top:10px;left:0;height:4px;width:24px}
+
 .marker{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border:2px solid var(--danger);display:none;pointer-events:none}
 .marker.pick{border-color:var(--gold)}
-.marker.ally{border-color:var(--mycor)}
 .marker .d{position:absolute;top:100%;left:50%;transform:translateX(-50%);font-size:8px;font-family:"Press Start 2P",monospace;color:#fff}
 .toast{position:fixed;left:50%;top:15%;transform:translateX(-50%);z-index:5;background:rgba(9,11,32,.95);
   border:2px solid var(--gold);padding:8px 14px;font-family:"Press Start 2P",monospace;font-size:9px;color:var(--gold);display:none}
@@ -200,20 +197,17 @@ input[type=text]{width:100%;background:#0e1030;border:2px solid #000;color:var(-
     <div class="bar" id="bShield"><i></i></div>
   </div>
 
-  <!-- CRUCETA IZQUIERDA -->
-  <div class="dpad-container">
-    <div class="dpad-center"></div>
-    <div class="dpad-btn" id="dpUp">▲</div>
-    <div class="dpad-btn" id="dpDown">▼</div>
-    <div class="dpad-btn" id="dpLeft">◄</div>
-    <div class="dpad-btn" id="dpRight">►</div>
+  <!-- JOYSTICK VIRTUAL -->
+  <div id="stickArea">
+    <div id="stickBase"></div>
+    <div id="stickKnob"></div>
   </div>
 
-  <!-- BOTONES DERECHA -->
-  <div class="action-container">
-    <div class="act-btn" id="btnSpecial">PODER</div>
-    <div class="act-btn" id="btnBoost">TURBO</div>
-    <div class="act-btn" id="btnFire">FUEGO</div>
+  <!-- BOTONES ACCIÓN -->
+  <div class="action-box">
+    <div class="btn-act" id="btnHeal">PODER</div>
+    <div class="btn-act" id="btnTurbo">TURBO</div>
+    <div class="btn-act" id="btnShoot">FUEGO</div>
   </div>
 </div>
 
@@ -222,11 +216,11 @@ input[type=text]{width:100%;background:#0e1030;border:2px solid #000;color:var(-
   <section class="screen on" id="scTitle">
     <div id="title">
       <div class="mark px"><span>VOXEL</span> <span>VOID</span></div>
-      <div class="sub px">Arcade Retro Espacial</div>
-      <p>Cruceta a la izquierda para pilotar. Botonera a la derecha para combatir.</p>
+      <div class="sub px">Guerra de las Tres Semillas</div>
+      <p>Joystick a la izquierda para pilotar. Botones a la derecha para combatir.</p>
       <div class="menu">
-        <button class="btn primary" data-go="faction">Iniciar</button>
-        <button class="btn" data-go="faction" data-quick="1">Combate Rápido</button>
+        <button class="btn primary" data-go="faction">Empezar</button>
+        <button class="btn" data-go="faction" data-quick="1">Partida Rápida</button>
       </div>
     </div>
   </section>
@@ -271,7 +265,7 @@ input[type=text]{width:100%;background:#0e1030;border:2px solid #000;color:var(-
       <div class="blk stage" id="stageShip"><canvas id="cvShip"></canvas></div>
       <div class="blk pane">
         <div class="row"><label>Casco</label><div class="hulls" id="hullList"></div></div>
-        <div class="row"><label>Estadísticas</label><div class="stats" id="statList"></div></div>
+        <div class="row"><label>Rendimiento</label><div class="stats" id="statList"></div></div>
         <button class="btn primary" data-go="mode">Continuar al despliegue</button>
       </div>
     </div>
@@ -292,8 +286,8 @@ input[type=text]{width:100%;background:#0e1030;border:2px solid #000;color:var(-
     <div class="blk card" style="padding:20px;text-align:center;max-width:440px">
       <h2 id="rTitle" style="font-size:16px;margin-bottom:12px"></h2>
       <div class="menu" style="justify-content:center">
-        <button class="btn primary" id="rAgain">Reintentar</button>
-        <button class="btn ghost" data-go="mode">Modos</button>
+        <button class="btn primary" id="rAgain">Volver a jugar</button>
+        <button class="btn ghost" data-go="mode">Cambiar modo</button>
       </div>
     </div>
   </section>
@@ -314,19 +308,19 @@ const FACTIONS = {
 const FKEYS = ['krovax','zylith','mycor'];
 
 const HULLS = {
-  escarabajo:{ id:'escarabajo', name:'ESCARABAJO', role:'Balance', base:{vel:27, giro:1.5, dano:12, cad:3.4, casco:130, escudo:60} },
-  martillo:{ id:'martillo', name:'MARTILLO', role:'Pesada', base:{vel:21, giro:1.15, dano:16, cad:2.2, casco:190, escudo:45} },
-  aguja:{ id:'aguja', name:'AGUJA', role:'Rápida', base:{vel:34, giro:1.9, dano:9, cad:4.8, casco:90, escudo:70} }
+  escarabajo:{ id:'escarabajo', name:'ESCARABAJO', role:'Equilibrada', base:{vel:28, giro:1.6, dano:12, cad:3.6, casco:130, escudo:60} },
+  martillo:{ id:'martillo', name:'MARTILLO', role:'Pesada', base:{vel:22, giro:1.2, dano:16, cad:2.4, casco:190, escudo:45} },
+  aguja:{ id:'aguja', name:'AGUJA', role:'Rápida', base:{vel:36, giro:2.0, dano:9, cad:5.0, casco:90, escudo:70} }
 };
 const HKEYS = ['escarabajo','martillo','aguja'];
 
 const SKINS  = [0xf0c39a,0xa06a43,0x8fd6c0,0xc9a2e0];
 const HELMS  = [0xdfe4f5,0xff6b2b,0x2fd4ff,0x8bf03a];
-const HELM_TYPES = [{id:0,n:'Abierto'},{id:1,n:'Completo'},{id:2,n:'Cresta'}];
+const HELM_TYPES = [{id:0,n:'Abierto'},{id:1,n:'Integral'},{id:2,n:'Cresta'}];
 
 const MODES = [
   {id:'historia', n:'Campaña', d:'Recoge 5 núcleos y abate al jefe.'},
-  {id:'1v1', n:'Duelo 1v1', d:'Combate individual directo.'},
+  {id:'1v1', n:'Duelo 1v1', d:'Combate espacial directo.'},
   {id:'2v2', n:'Escuadrón 2v2', d:'Vuela con un compañero.'}
 ];
 
@@ -363,7 +357,7 @@ function shipStats(hullId, factionId){
   return s;
 }
 
-/* 3D BUILDERS */
+/* CONSTRUCTORES 3D (MORRO HACIA -Z) */
 function mat(c,emi){ return new THREE.MeshLambertMaterial({color:c, emissive:emi||0, emissiveIntensity:emi?0.8:0}); }
 function box(g,x,y,z,w,h,d,c,emi){
   const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d), mat(c,emi));
@@ -383,40 +377,42 @@ function buildHead(p, fid){
   return g;
 }
 
+// Las naves se construyen orientadas hacia -Z (hacia adelante por estándar Three.js)
 function buildShip(hullId, fid, scale){
   const g=new THREE.Group(), f=FACTIONS[fid]||FACTIONS.zylith;
-  const A=f.hex, B=f.hex2, C=f.hex3, GL=0x88eeff;
+  const A=f.hex, B=f.hex2, C=f.hex3, GL=0x55d5ff;
+
   if(hullId==='escarabajo'){
-    box(g,0,0,0.2,1.2,0.5,2.6,A);
-    box(g,0,0.35,0,0.8,0.3,1.4,B);
-    box(g,0,0.2,0.9,0.5,0.25,0.6,GL,GL);
-    boxM(g,1.1,0,-0.1,1.1,0.22,1.4,A);
-    boxM(g,0.45,0,-1.4,0.4,0.4,0.4,C,C);
+    box(g,0,0,-0.2, 1.2,0.5,2.6, A);            // Fuselaje
+    box(g,0,0.35,0, 0.8,0.3,1.4, B);            // Cabina sup
+    box(g,0,0.2,-0.9, 0.5,0.25,0.6, GL,GL);     // Cristal
+    boxM(g,1.1,0,0.1, 1.2,0.2,1.4, A);          // Alas
+    boxM(g,0.45,0,1.35, 0.4,0.4,0.4, C,C);      // Motores
   } else if(hullId==='martillo'){
-    box(g,0,0,0,1.8,0.9,2.8,A);
-    box(g,0,0.5,-0.2,1.2,0.4,1.8,B);
-    box(g,0,0.3,1.3,0.6,0.3,0.6,GL,GL);
-    boxM(g,1.3,0.1,0.2,0.9,0.6,2.0,B);
-    boxM(g,0.6,-0.1,-1.6,0.5,0.5,0.5,C,C);
+    box(g,0,0,0, 1.8,0.9,2.8, A);
+    box(g,0,0.5,0.2, 1.2,0.4,1.8, B);
+    box(g,0,0.3,-1.2, 0.6,0.3,0.6, GL,GL);
+    boxM(g,1.3,0.1,-0.2, 0.9,0.6,2.0, B);
+    boxM(g,0.6,-0.1,1.5, 0.5,0.5,0.5, C,C);
   } else {
-    box(g,0,0,0,0.6,0.5,3.4,A);
-    box(g,0,0,1.9,0.3,0.25,1.0,C);
-    box(g,0,0.22,0.5,0.4,0.25,0.6,GL,GL);
-    boxM(g,0.7,0,-0.4,1.0,0.15,1.0,A);
-    box(g,0,0,-1.8,0.5,0.5,0.5,C,C);
+    box(g,0,0,0, 0.6,0.5,3.4, A);
+    box(g,0,0,-1.8, 0.3,0.25,1.0, C);
+    box(g,0,0.22,-0.5, 0.4,0.25,0.6, GL,GL);
+    boxM(g,0.7,0,0.4, 1.0,0.15,1.0, A);
+    box(g,0,0,1.7, 0.5,0.5,0.5, C,C);
   }
   g.scale.setScalar(scale||1);
   return g;
 }
 
-/* PREVIEWS */
+/* PREVIEWS MENÚS */
 let PV_PILOT=null, PV_SHIP=null;
 function makePreview(canvas, stageEl){
   const r=new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
   r.setPixelRatio(Math.min(devicePixelRatio,2));
   const sc=new THREE.Scene(), cam=new THREE.PerspectiveCamera(38,1,0.1,100);
   cam.position.set(0,0.4,5);
-  sc.add(new THREE.AmbientLight(0x8892c8,0.8));
+  sc.add(new THREE.AmbientLight(0x8892c8,0.9));
   const key=new THREE.DirectionalLight(0xffffff,1.1); key.position.set(4,6,6); sc.add(key);
   const pivot=new THREE.Group(); sc.add(pivot);
   const s={r,sc,cam,pivot};
@@ -441,10 +437,12 @@ function startShipPreview(){
     PV_SHIP.cam.position.set(0,1.6,6.5); PV_SHIP.cam.lookAt(0,0,0);
   }
   PV_SHIP.pivot.clear();
-  PV_SHIP.pivot.add(buildShip(S.ship.hull, S.faction, 1));
+  const sh=buildShip(S.ship.hull, S.faction, 1);
+  sh.rotation.y = Math.PI; // En el menú mira de frente
+  PV_SHIP.pivot.add(sh);
 }
 
-/* UI LOGIC */
+/* UI MENÚS */
 function renderFactions(){
   const el=$('#factionList'); el.innerHTML='';
   FKEYS.forEach(k=>{
@@ -495,40 +493,28 @@ function renderModes(){
 }
 
 /* ============================================================
-   COMBATE CON CRUCETA RETRO (D-PAD)
+   COMBATE CON JOYSTICK Y CÁMARA HIJA (NAVE SIEMPRE EN EL CENTRO)
 ============================================================ */
 const G = {
   renderer:null, scene:null, cam:null, clock:null,
   player:null, actors:[], bullets:[], parts:[], pickups:[], markers:[],
   running:false, over:false, kills:0, cores:0, coresNeeded:5, bossUp:false,
   keys:{},
-  // Entrada de la cruceta y botones
-  input:{
-    up:false,
-    down:false,
-    left:false,
-    right:false,
-    fire:false,
-    boost:false
-  }
+  stick:{ x:0, y:0 }, // Ejes analógicos (-1 a 1)
+  btnShoot:false,
+  btnTurbo:false
 };
-
-const UP = new THREE.Vector3(0,1,0);
-function quatTowards(from, to){
-  const m=new THREE.Matrix4().lookAt(to, from, UP);
-  return new THREE.Quaternion().setFromRotationMatrix(m);
-}
 
 function buildSpaceWorld(){
   const sc=G.scene;
   sc.background=new THREE.Color(0x060817);
-  sc.fog=new THREE.FogExp2(0x080a1c, 0.0018);
-  sc.add(new THREE.AmbientLight(0x94a0d8, 0.9));
-  const sun=new THREE.DirectionalLight(0xfff0d0, 1.2); sun.position.set(-200,300,-200); sc.add(sun);
+  sc.fog=new THREE.FogExp2(0x080a1c, 0.0015);
+  sc.add(new THREE.AmbientLight(0xb0b8e8, 1.0));
+  const sun=new THREE.DirectionalLight(0xfff0d0, 1.3); sun.position.set(-200,300,-200); sc.add(sun);
 
   // Estrellas
   const sg=new THREE.BufferGeometry(), pos=[];
-  for(let i=0;i<1200;i++){
+  for(let i=0;i<1500;i++){
     const v=new THREE.Vector3(rnd(-1,1),rnd(-1,1),rnd(-1,1)).normalize().multiplyScalar(rnd(1000,1600));
     pos.push(v.x,v.y,v.z);
   }
@@ -541,10 +527,10 @@ function buildSpaceWorld(){
 
   // Asteroides
   G.rocks=[];
-  for(let i=0;i<30;i++){
+  for(let i=0;i<32;i++){
     const g=new THREE.Group();
-    box(g,0,0,0,rnd(8,18),rnd(8,18),rnd(8,18),0x3f4459);
-    const a=Math.random()*Math.PI*2, r=rnd(140,460);
+    box(g,0,0,0,rnd(10,20),rnd(10,20),rnd(10,20),0x484e68);
+    const a=Math.random()*Math.PI*2, r=rnd(150,450);
     g.position.set(Math.cos(a)*r, rnd(-80,80), Math.sin(a)*r);
     sc.add(g); G.rocks.push(g);
   }
@@ -553,14 +539,15 @@ function buildSpaceWorld(){
 function makeActor(cfg){
   const st=shipStats(cfg.hull, cfg.faction);
   const mesh=buildShip(cfg.hull, cfg.faction, cfg.scale||1.4);
-  const holder=new THREE.Group(); holder.add(mesh);
+  const holder=new THREE.Group();
+  holder.add(mesh);
   holder.position.copy(cfg.pos);
   G.scene.add(holder);
 
   const a={
     obj:holder, mesh, team:cfg.team, faction:cfg.faction, isPlayer:!!cfg.isPlayer,
     stats:st, hull:st.casco, hullMax:st.casco, shield:st.escudo, shieldMax:st.escudo,
-    cool:0, abCd:0, dead:false, speed:st.vel*(cfg.speedMul||1), boostT:0,
+    cool:0, dead:false, speed:st.vel*(cfg.speedMul||1),
     boss:!!cfg.boss, name:cfg.name
   };
   G.actors.push(a);
@@ -574,22 +561,37 @@ function makeMarker(cls,lbl){
   return d;
 }
 
+// Disparos grandes, luminosos y hacia adelante (-Z)
+const BULLET_GEO = new THREE.BoxGeometry(1.2, 1.2, 7.0);
 function fire(a){
-  const dmg=a.stats.dano;
-  const dir=new THREE.Vector3(0,0,1).applyQuaternion(a.obj.quaternion);
-  [-1.6,1.6].forEach(o=>{
-    const m=new THREE.Mesh(new THREE.BoxGeometry(0.8,0.8,4.5), new THREE.MeshBasicMaterial({color:FACTIONS[a.faction].hex}));
-    const side=new THREE.Vector3(1,0,0).applyQuaternion(a.obj.quaternion).multiplyScalar(o);
-    m.position.copy(a.obj.position).add(side).add(dir.clone().multiplyScalar(2));
+  const dmg = a.stats.dano;
+  // Dirección de avance (-Z local)
+  const dir = new THREE.Vector3(0,0,-1).applyQuaternion(a.obj.quaternion);
+
+  [-2.0, 2.0].forEach(sideOffset=>{
+    const col = a.faction==='krovax'? 0xff6b2b : (a.faction==='mycor'? 0x8bf03a : 0x2fd4ff);
+    const m = new THREE.Mesh(BULLET_GEO, new THREE.MeshBasicMaterial({color:col}));
+    
+    // Salen de las alas hacia adelante
+    const side = new THREE.Vector3(1,0,0).applyQuaternion(a.obj.quaternion).multiplyScalar(sideOffset);
+    m.position.copy(a.obj.position).add(side).add(dir.clone().multiplyScalar(2.0));
     m.quaternion.copy(a.obj.quaternion);
+    
     G.scene.add(m);
-    G.bullets.push({obj:m, v:dir.clone().multiplyScalar(210), life:2.2, dmg, team:a.team, from:a.faction});
+    G.bullets.push({
+      obj:m,
+      v:dir.clone().multiplyScalar(240),
+      life:2.5,
+      dmg:dmg,
+      team:a.team,
+      from:a.faction
+    });
   });
 }
 
 function burst(pos, color, n){
-  for(let i=0;i<(n||10);i++){
-    const m=new THREE.Mesh(new THREE.BoxGeometry(2,2,2), new THREE.MeshBasicMaterial({color}));
+  for(let i=0;i<(n||12);i++){
+    const m=new THREE.Mesh(new THREE.BoxGeometry(2.5,2.5,2.5), new THREE.MeshBasicMaterial({color}));
     m.position.copy(pos); G.scene.add(m);
     G.parts.push({obj:m, v:new THREE.Vector3(rnd(-1,1),rnd(-1,1),rnd(-1,1)).normalize().multiplyScalar(rnd(15,40)), life:0.8});
   }
@@ -602,7 +604,7 @@ function damage(a, val){
   }
   a.hull-=val;
   if(a.hull<=0){
-    a.dead=true; burst(a.obj.position, FACTIONS[a.faction].hex, 24);
+    a.dead=true; burst(a.obj.position, FACTIONS[a.faction].hex, 28);
     G.scene.remove(a.obj);
     if(a.marker) a.marker.style.display='none';
     if(a.isPlayer) endBattle(false);
@@ -614,42 +616,42 @@ function damage(a, val){
 }
 
 function playerUpdate(a, dt){
-  const inp=G.input;
   const k=G.keys;
+  let yaw = -G.stick.x;   // Stick horizontal gira la nave
+  let pitch = -G.stick.y; // Stick vertical sube / baja
 
-  let yaw = 0;
-  let pitch = 0;
+  // Soporte teclado para PC
+  if(k['a']||k['arrowleft'])  yaw += 1;
+  if(k['d']||k['arrowright']) yaw -= 1;
+  if(k['w']||k['arrowup'])    pitch += 1;
+  if(k['s']||k['arrowdown'])  pitch -= 1;
 
-  // Cruceta virtual o teclas WASD / Flechas
-  if(inp.left  || k['a'] || k['arrowleft'])  yaw += 1;
-  if(inp.right || k['d'] || k['arrowright']) yaw -= 1;
-  if(inp.up    || k['w'] || k['arrowup'])    pitch += 1;
-  if(inp.down  || k['s'] || k['arrowdown'])  pitch -= 1;
-
-  // Giro suave con respuesta directa de cruceta
-  const rate = a.stats.giro * dt * 1.6;
+  // Rotaciones directas y fluidas
+  const rate = a.stats.giro * dt * 1.5;
   const qy = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0), yaw * rate);
   const qx = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1,0,0), pitch * rate);
   a.obj.quaternion.multiply(qy).multiply(qx);
 
-  const boosting = inp.boost || k['shift'];
+  // Avance frontal constante (-Z)
+  const boosting = G.btnTurbo || k['shift'];
   const sp = a.speed * (boosting ? 1.9 : 1.0);
-  const fwd = new THREE.Vector3(0,0,1).applyQuaternion(a.obj.quaternion);
+  const fwd = new THREE.Vector3(0,0,-1).applyQuaternion(a.obj.quaternion);
   a.obj.position.add(fwd.multiplyScalar(sp*dt));
 
-  // Inclinación visual (Roll) al girar hacia los lados
-  a.mesh.rotation.z = THREE.MathUtils.lerp(a.mesh.rotation.z, -yaw * 0.45, dt * 8);
+  // Alabeo visual de la nave
+  a.mesh.rotation.z = THREE.MathUtils.lerp(a.mesh.rotation.z, -yaw * 0.5, dt * 7);
 
-  a.cool-=dt;
-  if((inp.fire || k[' ']) && a.cool<=0){
-    a.cool = 1/a.stats.cad;
+  // Disparo
+  a.cool -= dt;
+  if((G.btnShoot || k[' ']) && a.cool<=0){
+    a.cool = 1 / a.stats.cad;
     fire(a);
   }
 
-  // Recoger núcleos
+  // Recogida de cristales
   for(let i=G.pickups.length-1;i>=0;i--){
     const p=G.pickups[i];
-    if(p.obj.position.distanceTo(a.obj.position)<24){
+    if(p.obj.position.distanceTo(a.obj.position)<26){
       burst(p.obj.position, 0xffd24a, 16);
       G.scene.remove(p.obj); p.marker.remove();
       G.pickups.splice(i,1);
@@ -662,7 +664,7 @@ function playerUpdate(a, dt){
 function spawnBoss(){
   G.bossUp=true;
   const ef=FACTIONS[S.faction].weak;
-  const pos=G.player.obj.position.clone().add(new THREE.Vector3(0,30,220));
+  const pos=G.player.obj.position.clone().add(new THREE.Vector3(0,25,-220));
   const b=makeActor({hull:'martillo', faction:ef, pos, team:2, name:'GUARDIÁN', boss:true, scale:3.2});
   b.hullMax*=3.5; b.hull=b.hullMax;
   b.marker=makeMarker('','GUARDIÁN');
@@ -683,32 +685,39 @@ function startBattle(){
   G.renderer.setSize(innerWidth,innerHeight,false);
   G.scene=new THREE.Scene();
 
-  // Cámara centrada en perspectiva
-  G.cam=new THREE.PerspectiveCamera(55, innerWidth/innerHeight, 0.5, 3000);
+  // Cámara con FOV amplio para vista panorámica apaisada
+  G.cam=new THREE.PerspectiveCamera(54, innerWidth/innerHeight, 0.5, 3000);
   G.clock=new THREE.Clock();
   G.actors=[]; G.bullets=[]; G.parts=[]; G.pickups=[];
   G.kills=0; G.cores=0; G.bossUp=false; G.over=false;
 
   buildSpaceWorld();
 
-  // Nave del jugador
-  G.player=makeActor({hull:S.ship.hull, faction:S.faction, pos:new THREE.Vector3(0,0,-80), team:1, isPlayer:true});
+  // 1. Crear jugador en el centro
+  G.player=makeActor({hull:S.ship.hull, faction:S.faction, pos:new THREE.Vector3(0,0,0), team:1, isPlayer:true});
+
+  // 2. FIJAR CÁMARA COMO HIJA DE LA NAVE:
+  // Siempre 3.8 unidades arriba y 14.5 unidades por detrás (+Z)
+  // Mirando directamente al frente por encima del morro hacia el retículo
+  G.cam.position.set(0, 3.8, 14.5);
+  G.cam.lookAt(0, 0.8, -30);
+  G.player.obj.add(G.cam);
 
   if(S.mode==='historia'){
     G.coresNeeded=5;
     for(let i=0;i<5;i++){
-      const a=Math.random()*Math.PI*2, r=rnd(160,400);
+      const a=Math.random()*Math.PI*2, r=rnd(180,400);
       const g=new THREE.Group();
       box(g,0,0,0,5,5,5,0xffd24a,0xffd24a);
-      g.position.set(Math.cos(a)*r, rnd(-40,40), Math.sin(a)*r);
+      g.position.set(Math.cos(a)*r, rnd(-30,30), Math.sin(a)*r);
       G.scene.add(g);
       G.pickups.push({obj:g, marker:makeMarker('pick','NÚCLEO')});
     }
-    const e=makeActor({hull:'aguja', faction:FACTIONS[S.faction].strong, pos:new THREE.Vector3(0,0,200), team:2});
+    const e=makeActor({hull:'aguja', faction:FACTIONS[S.faction].strong, pos:new THREE.Vector3(0,0,-220), team:2});
     e.marker=makeMarker('','ENEMIGO');
     $('#objT').textContent='CAMPAÑA: 5 NÚCLEOS';
   } else {
-    const e=makeActor({hull:'escarabajo', faction:FACTIONS[S.faction].strong, pos:new THREE.Vector3(0,0,220), team:2});
+    const e=makeActor({hull:'escarabajo', faction:FACTIONS[S.faction].strong, pos:new THREE.Vector3(0,0,-220), team:2});
     e.marker=makeMarker('','ENEMIGO');
     $('#objT').textContent='DUELO';
   }
@@ -726,23 +735,25 @@ function frame(){
     if(a.dead) return;
     if(a.isPlayer) playerUpdate(a,dt);
     else {
-      // IA de persecución
+      // IA básica de persecución
       const toP=G.player.obj.position.clone().sub(a.obj.position);
-      a.obj.quaternion.slerp(quatTowards(a.obj.position, G.player.obj.position), dt*1.2);
-      a.obj.position.add(new THREE.Vector3(0,0,1).applyQuaternion(a.obj.quaternion).multiplyScalar(a.speed*0.8*dt));
+      const mRot=new THREE.Matrix4().lookAt(a.obj.position, G.player.obj.position, new THREE.Vector3(0,1,0));
+      a.obj.quaternion.slerp(new THREE.Quaternion().setFromRotationMatrix(mRot), dt*1.2);
+      a.obj.position.add(new THREE.Vector3(0,0,-1).applyQuaternion(a.obj.quaternion).multiplyScalar(a.speed*0.8*dt));
       a.cool-=dt;
-      if(toP.length()<300 && a.cool<=0){ a.cool=1/a.stats.cad; fire(a); }
+      if(toP.length()<280 && a.cool<=0){ a.cool=1/a.stats.cad; fire(a); }
     }
   });
 
   // Balas
   for(let i=G.bullets.length-1;i>=0;i--){
     const b=G.bullets[i];
-    b.life-=dt; b.obj.position.add(b.v.clone().multiplyScalar(dt));
+    b.life-=dt;
+    b.obj.position.add(b.v.clone().multiplyScalar(dt));
     let hit=false;
     for(const a of G.actors){
       if(a.dead || a.team===b.team) continue;
-      if(b.obj.position.distanceTo(a.obj.position)<(a.boss?32:10)){
+      if(b.obj.position.distanceTo(a.obj.position)<(a.boss?32:11)){
         damage(a, b.dmg); burst(b.obj.position, FACTIONS[b.from].hex, 6);
         hit=true; break;
       }
@@ -756,28 +767,16 @@ function frame(){
     if(p.life<=0){ G.scene.remove(p.obj); G.parts.splice(i,1); }
   }
 
-  // ============================================================
-  // CÁMARA CENTRADA (Nave siempre en el medio exacto)
-  // ============================================================
+  // HUD
   const pl=G.player;
   if(pl && !pl.dead){
-    // Elevación suave y distancia fija en el eje Z local
-    const camOffset = new THREE.Vector3(0, 4.0, -16).applyQuaternion(pl.obj.quaternion);
-    const targetCamPos = pl.obj.position.clone().add(camOffset);
-    G.cam.position.lerp(targetCamPos, dt * 12);
-
-    // Mirar hacia adelante sobre el morro de la nave
-    const lookTarget = pl.obj.position.clone().add(new THREE.Vector3(0, 1.2, 26).applyQuaternion(pl.obj.quaternion));
-    G.cam.lookAt(lookTarget);
-    G.cam.up.set(0,1,0).applyQuaternion(pl.obj.quaternion);
-
     $('#bHull').querySelector('i').style.width=(clamp(pl.hull/pl.hullMax,0,1)*100)+'%';
     $('#bShield').querySelector('i').style.width=(clamp(pl.shield/Math.max(1,pl.shieldMax),0,1)*100)+'%';
     $('#hullTxt').textContent=Math.max(0,Math.round(pl.hull));
     $('#shTxt').textContent=Math.max(0,Math.round(pl.shield));
   }
 
-  // Marcadores de enemigos y cristales
+  // Marcadores en pantalla
   const v=new THREE.Vector3();
   G.actors.concat(G.pickups).forEach(item=>{
     const m=item.marker; if(!m) return;
@@ -805,39 +804,91 @@ function endBattle(win){
     $('#rTitle').textContent = win? '¡SECTOR ASEGURADO!' : 'NAVE DERRIBADA';
     $('#rTitle').style.color = win? 'var(--gold)' : 'var(--danger)';
     show('result');
-  }, 1000);
+  }, 900);
 }
 
 /* ============================================================
-   ENLACE DE CONTROLES TÁCTILES (CRUCETA Y BOTONES)
+   CONTROL DEL JOYSTICK TÁCTIL (THUMBSTICK)
 ============================================================ */
-function bindTouchButton(elemId, keyName){
-  const el = $(elemId);
-  const setKey = (active)=>{
-    G.input[keyName] = active;
-    if(active) el.classList.add('pressed');
-    else el.classList.remove('pressed');
-  };
+const stickArea = $('#stickArea');
+const stickKnob = $('#stickKnob');
+let touchId = null;
+let center = { x:0, y:0 };
+const MAX_RADIUS = 46;
 
-  el.addEventListener('touchstart', e=>{ e.preventDefault(); setKey(true); }, {passive:false});
-  el.addEventListener('touchend',   e=>{ e.preventDefault(); setKey(false); }, {passive:false});
-  el.addEventListener('touchcancel',e=>{ e.preventDefault(); setKey(false); }, {passive:false});
-  
-  // Soporte ratón en PC para pruebas
-  el.addEventListener('mousedown', ()=>{ setKey(true); });
-  el.addEventListener('mouseup',   ()=>{ setKey(false); });
-  el.addEventListener('mouseleave',()=>{ setKey(false); });
+stickArea.addEventListener('touchstart', e=>{
+  e.preventDefault();
+  if(touchId !== null) return;
+  const t = e.changedTouches[0];
+  touchId = t.identifier;
+  const rect = stickArea.getBoundingClientRect();
+  center = { x: rect.left + rect.width/2, y: rect.top + rect.height/2 };
+  updateJoystick(t.clientX, t.clientY);
+}, {passive:false});
+
+window.addEventListener('touchmove', e=>{
+  if(touchId === null) return;
+  for(let i=0; i<e.changedTouches.length; i++){
+    const t = e.changedTouches[i];
+    if(t.identifier === touchId){
+      updateJoystick(t.clientX, t.clientY);
+      break;
+    }
+  }
+}, {passive:false});
+
+const releaseStick = e=>{
+  if(touchId === null) return;
+  for(let i=0; i<e.changedTouches.length; i++){
+    if(e.changedTouches[i].identifier === touchId){
+      touchId = null;
+      G.stick.x = 0;
+      G.stick.y = 0;
+      stickKnob.style.transform = 'translate3d(0,0,0)';
+      break;
+    }
+  }
+};
+window.addEventListener('touchend', releaseStick, {passive:false});
+window.addEventListener('touchcancel', releaseStick, {passive:false});
+
+function updateJoystick(clientX, clientY){
+  let dx = clientX - center.x;
+  let dy = clientY - center.y;
+  const dist = Math.hypot(dx, dy);
+
+  if(dist > MAX_RADIUS){
+    dx = (dx / dist) * MAX_RADIUS;
+    dy = (dy / dist) * MAX_RADIUS;
+  }
+
+  stickKnob.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
+  // Normalizar entre -1 y 1
+  G.stick.x = dx / MAX_RADIUS;
+  G.stick.y = dy / MAX_RADIUS;
 }
 
-bindTouchButton('#dpUp',    'up');
-bindTouchButton('#dpDown',  'down');
-bindTouchButton('#dpLeft',  'left');
-bindTouchButton('#dpRight', 'right');
-bindTouchButton('#btnFire', 'fire');
-bindTouchButton('#btnBoost','boost');
+/* ============================================================
+   BOTONES DE ACCIÓN (DERECHA)
+============================================================ */
+function bindBtn(id, key){
+  const el = $(id);
+  const press = ()=>{ G[key] = true; el.classList.add('down'); };
+  const release = ()=>{ G[key] = false; el.classList.remove('down'); };
 
-// Botón de habilidad especial (Poder)
-$('#btnSpecial').addEventListener('touchstart', e=>{
+  el.addEventListener('touchstart', e=>{ e.preventDefault(); press(); }, {passive:false});
+  el.addEventListener('touchend',   e=>{ e.preventDefault(); release(); }, {passive:false});
+  el.addEventListener('touchcancel',e=>{ e.preventDefault(); release(); }, {passive:false});
+
+  el.addEventListener('mousedown', press);
+  el.addEventListener('mouseup', release);
+  el.addEventListener('mouseleave', release);
+}
+
+bindBtn('#btnShoot', 'btnShoot');
+bindBtn('#btnTurbo', 'btnTurbo');
+
+$('#btnHeal').addEventListener('touchstart', e=>{
   e.preventDefault();
   if(G.running && G.player && !G.player.dead){
     G.player.hull = Math.min(G.player.hullMax, G.player.hull + 45);
@@ -848,7 +899,6 @@ $('#btnSpecial').addEventListener('touchstart', e=>{
 
 $('#tQuit').addEventListener('click',()=>{ G.running=false; G.over=true; show('mode'); });
 
-// Soporte teclado físico (PC/Mac)
 addEventListener('keydown', e=>{ G.keys[e.key.toLowerCase()] = true; });
 addEventListener('keyup',   e=>{ G.keys[e.key.toLowerCase()] = false; });
 

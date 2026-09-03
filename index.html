@@ -9,13 +9,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Chakra+Petch:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --void:#0a0b1d;
-  --void-2:#131634;
-  --panel:#1b1f42;
-  --panel-hi:#2b3168;
+  --void:#060814;
+  --void-2:#0f122c;
+  --panel:#171a3b;
+  --panel-hi:#262c63;
   --line:#000;
   --ink:#e8ecff;
-  --ink-dim:#9aa3d0;
+  --ink-dim:#8b94c9;
   --krovax:#ff6b2b;
   --zylith:#2fd4ff;
   --mycor:#8bf03a;
@@ -33,11 +33,11 @@ canvas{display:block}
 #app{position:fixed;inset:0;z-index:2;display:flex;align-items:center;justify-content:center}
 
 #rotateWarning{
-  position:fixed;inset:0;z-index:9999;background:#0a0b1d;
+  position:fixed;inset:0;z-index:9999;background:#060814;
   display:none;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;padding:24px;gap:16px;
 }
-#rotateWarning .icon{font-size:42px;animation:rot 2s infinite ease-in-out}
+#rotateWarning .icon{font-size:48px;animation:rot 2s infinite ease-in-out}
 #rotateWarning p{font-family:"Press Start 2P",monospace;font-size:11px;color:var(--gold);line-height:1.8}
 @keyframes rot{0%,10%{transform:rotate(0deg)}50%,60%{transform:rotate(-90deg)}100%{transform:rotate(-90deg)}}
 @media (orientation: portrait){#rotateWarning{display:flex}}
@@ -47,15 +47,15 @@ canvas{display:block}
 .screen.on{display:flex}
 
 .blk{background:var(--panel);border:3px solid var(--line);
-  box-shadow:inset 0 2px 0 rgba(255,255,255,.09), inset 0 -3px 0 rgba(0,0,0,.35), 4px 4px 0 rgba(0,0,0,.55)}
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.09), inset 0 -3px 0 rgba(0,0,0,.35), 4px 4px 0 rgba(0,0,0,.6)}
 .btn{font-family:"Press Start 2P",monospace;font-size:10px;color:var(--ink);cursor:pointer;
   background:var(--panel-hi);border:3px solid var(--line);padding:10px 16px;
   box-shadow:inset 0 2px 0 rgba(255,255,255,.14), inset 0 -4px 0 rgba(0,0,0,.4), 4px 4px 0 rgba(0,0,0,.5);
   transition:transform .06s steps(2), background .12s}
-.btn:hover{background:#39408a;transform:translate(-1px,-1px)}
+.btn:hover{background:#353c7d;transform:translate(-1px,-1px)}
 .btn:active{transform:translate(2px,2px);box-shadow:none}
-.btn.primary{background:var(--f);color:#0b0b1a}
-.btn.ghost{background:transparent;box-shadow:none;border-color:#454b8f;font-size:9px;padding:8px 10px}
+.btn.primary{background:var(--f);color:#060814}
+.btn.ghost{background:transparent;box-shadow:none;border-color:#3f478c;font-size:9px;padding:8px 10px}
 .btn:disabled{opacity:.35;cursor:not-allowed}
 
 #title{text-align:center;max-width:680px;display:flex;flex-direction:column;align-items:center;gap:6px}
@@ -73,7 +73,7 @@ canvas{display:block}
 
 .factions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(960px,100%)}
 .fcard{padding:0;cursor:pointer;text-align:left;overflow:hidden}
-.fcard .crest{height:50px;display:flex;align-items:center;justify-content:center;font-size:28px;
+.fcard .crest{height:52px;display:flex;align-items:center;justify-content:center;font-size:28px;
   border-bottom:2px solid var(--line)}
 .fcard .body{padding:8px 10px}
 .fcard h3{font-size:11px;margin-bottom:4px}
@@ -82,7 +82,7 @@ canvas{display:block}
 
 .editor{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:min(900px,100%);max-height:76vh}
 .stage{position:relative;min-height:200px;display:flex;align-items:center;justify-content:center;
-  background:radial-gradient(120% 100% at 50% 0%, #242b63 0%, #10122c 55%, #08091a 100%)}
+  background:radial-gradient(120% 100% at 50% 0%, #212759 0%, #0d0f26 60%, #060714 100%)}
 .stage canvas{width:100%;height:100%}
 .pane{padding:10px 14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;max-height:72vh}
 .row label{display:block;font-size:9px;font-family:"Press Start 2P",monospace;color:var(--ink-dim);margin-bottom:6px}
@@ -91,7 +91,7 @@ canvas{display:block}
 .sw.sel{outline:2px solid var(--gold);outline-offset:2px}
 .opt{padding:6px 10px;font-size:11px;background:#232853;border:2px solid #000;cursor:pointer}
 .opt.sel{background:var(--f);color:#0b0b1a;font-weight:700}
-input[type=text]{width:100%;background:#0e1030;border:2px solid #000;color:var(--ink);padding:6px 8px;font-size:13px}
+input[type=text]{width:100%;background:#0a0c21;border:2px solid #000;color:var(--ink);padding:6px 8px;font-size:13px}
 
 .hulls{display:flex;gap:8px}
 .hull{flex:1;padding:8px;background:#232853;border:2px solid #000;cursor:pointer;text-align:center}
@@ -99,7 +99,7 @@ input[type=text]{width:100%;background:#0e1030;border:2px solid #000;color:var(-
 .hull.sel{background:var(--f);color:#0b0b1a}
 .stats{display:flex;flex-direction:column;gap:5px}
 .stat{display:grid;grid-template-columns:70px 1fr 40px;align-items:center;gap:6px;font-size:10px}
-.bar{height:10px;background:#0c0e26;border:1px solid #000;position:relative}
+.bar{height:10px;background:#080a1c;border:1px solid #000;position:relative}
 .bar i{position:absolute;inset:0;width:0;background:var(--f)}
 .stat .v{text-align:right;font-family:"Press Start 2P",monospace;font-size:8px}
 
@@ -108,10 +108,10 @@ input[type=text]{width:100%;background:#0e1030;border:2px solid #000;color:var(-
 .mcard h3{font-size:10px;margin-bottom:6px;color:var(--gold)}
 .mcard p{font-size:11px;color:#c2c9ef;line-height:1.4}
 
-/* HUD & JOYSTICK */
+/* HUD RETRO ARCADE */
 #hud{position:fixed;inset:0;z-index:3;display:none;pointer-events:none}
 #hud.on{display:block}
-.hbars{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);width:180px;pointer-events:none}
+.hbars{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);width:190px;pointer-events:none}
 .hbars .lbl{font-family:"Press Start 2P",monospace;font-size:7px;color:var(--ink-dim);margin-bottom:2px;text-align:center}
 .hbars .bar{height:8px;margin-bottom:3px}
 #bHull i{background:var(--mycor)}
@@ -119,57 +119,57 @@ input[type=text]{width:100%;background:#0e1030;border:2px solid #000;color:var(-
 
 /* JOYSTICK TÁCTIL (IZQUIERDA) */
 #stickArea{
-  position:absolute;left:18px;bottom:18px;width:150px;height:150px;
+  position:absolute;left:20px;bottom:20px;width:140px;height:140px;
   pointer-events:auto;touch-action:none;
 }
 #stickBase{
   position:absolute;inset:0;border-radius:50%;
-  background:rgba(20,24,55,0.65);border:3px solid rgba(255,255,255,0.25);
-  box-shadow:inset 0 0 16px rgba(0,0,0,0.6), 0 4px 10px rgba(0,0,0,0.5);
+  background:radial-gradient(circle, rgba(32,38,82,0.75) 0%, rgba(13,16,40,0.85) 100%);
+  border:2px solid rgba(255,255,255,0.3);box-shadow:inset 0 0 12px rgba(0,0,0,0.8);
 }
 #stickKnob{
-  position:absolute;top:50%;left:50%;width:64px;height:64px;margin:-32px 0 0 -32px;
+  position:absolute;top:50%;left:50%;width:58px;height:58px;margin:-29px 0 0 -29px;
   border-radius:50%;background:var(--panel-hi);border:3px solid var(--gold);
-  box-shadow:0 3px 6px rgba(0,0,0,0.6), inset 0 2px 0 rgba(255,255,255,0.3);
+  box-shadow:0 4px 8px rgba(0,0,0,0.7), inset 0 2px 0 rgba(255,255,255,0.4);
   pointer-events:none;transform:translate3d(0,0,0);
 }
 
-/* BOTONERA ACCIÓN (DERECHA) */
+/* BOTONES ARCADE (DERECHA) */
 .action-box{
-  position:absolute;right:18px;bottom:18px;width:160px;height:150px;
+  position:absolute;right:20px;bottom:20px;width:150px;height:140px;
   pointer-events:auto;
 }
 .btn-act{
   position:absolute;border-radius:50%;border:3px solid #000;color:#fff;
   font-family:"Press Start 2P",monospace;display:flex;align-items:center;justify-content:center;
-  box-shadow:inset 0 3px 0 rgba(255,255,255,0.3), 3px 3px 0 #000;touch-action:none;
+  box-shadow:inset 0 3px 0 rgba(255,255,255,0.35), 3px 3px 0 #000;touch-action:none;
 }
 .btn-act:active, .btn-act.down{transform:scale(0.92);box-shadow:none}
 
-#btnShoot{right:6px;bottom:26px;width:76px;height:76px;background:var(--danger);font-size:10px}
-#btnTurbo{left:6px;bottom:4px;width:54px;height:54px;background:#c29015;font-size:8px}
-#btnHeal{top:4px;left:42px;width:52px;height:52px;background:#2b3168;border-color:var(--gold);color:var(--gold);font-size:7px}
+#btnShoot{right:4px;bottom:24px;width:74px;height:74px;background:var(--danger);font-size:10px}
+#btnTurbo{left:6px;bottom:4px;width:52px;height:52px;background:#b8830e;font-size:8px}
+#btnHeal{top:2px;left:40px;width:50px;height:50px;background:#242a59;border-color:var(--gold);color:var(--gold);font-size:7px}
 
 #tQuit{position:absolute;right:16px;top:16px;font-size:8px;padding:6px 10px;pointer-events:auto;
-  background:rgba(27,31,66,0.85);border:2px solid #000;color:#fff;font-family:"Press Start 2P",monospace}
+  background:rgba(23,26,59,0.85);border:2px solid #000;color:#fff;font-family:"Press Start 2P",monospace}
 
 .objective{position:absolute;top:10px;left:50%;transform:translateX(-50%);text-align:center;
-  background:rgba(9,11,32,.85);border:2px solid #000;padding:4px 12px;pointer-events:none}
+  background:rgba(6,8,20,.85);border:2px solid #000;padding:4px 14px;pointer-events:none}
 .objective .t{font-family:"Press Start 2P",monospace;font-size:8px;color:var(--gold)}
 .objective .s{font-size:10px;color:#cdd4f7}
 
 .crosshair{
-  position:absolute;left:50%;top:46%;width:24px;height:24px;
+  position:absolute;left:50%;top:44%;width:26px;height:26px;
   transform:translate(-50%,-50%);pointer-events:none;
 }
 .crosshair::before,.crosshair::after{content:"";position:absolute;background:rgba(255,255,255,0.85)}
-.crosshair::before{left:10px;top:0;width:4px;height:24px}
-.crosshair::after{top:10px;left:0;height:4px;width:24px}
+.crosshair::before{left:11px;top:0;width:4px;height:26px}
+.crosshair::after{top:11px;left:0;height:4px;width:26px}
 
 .marker{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border:2px solid var(--danger);display:none;pointer-events:none}
 .marker.pick{border-color:var(--gold)}
 .marker .d{position:absolute;top:100%;left:50%;transform:translateX(-50%);font-size:8px;font-family:"Press Start 2P",monospace;color:#fff}
-.toast{position:fixed;left:50%;top:15%;transform:translateX(-50%);z-index:5;background:rgba(9,11,32,.95);
+.toast{position:fixed;left:50%;top:15%;transform:translateX(-50%);z-index:5;background:rgba(6,8,20,.95);
   border:2px solid var(--gold);padding:8px 14px;font-family:"Press Start 2P",monospace;font-size:9px;color:var(--gold);display:none}
 </style>
 </head>
@@ -197,13 +197,11 @@ input[type=text]{width:100%;background:#0e1030;border:2px solid #000;color:var(-
     <div class="bar" id="bShield"><i></i></div>
   </div>
 
-  <!-- JOYSTICK VIRTUAL -->
   <div id="stickArea">
     <div id="stickBase"></div>
     <div id="stickKnob"></div>
   </div>
 
-  <!-- BOTONES ACCIÓN -->
   <div class="action-box">
     <div class="btn-act" id="btnHeal">PODER</div>
     <div class="btn-act" id="btnTurbo">TURBO</div>
@@ -216,8 +214,8 @@ input[type=text]{width:100%;background:#0e1030;border:2px solid #000;color:var(-
   <section class="screen on" id="scTitle">
     <div id="title">
       <div class="mark px"><span>VOXEL</span> <span>VOID</span></div>
-      <div class="sub px">Guerra de las Tres Semillas</div>
-      <p>Joystick a la izquierda para pilotar. Botones a la derecha para combatir.</p>
+      <div class="sub px">Arcade Retro Espacial 3D</div>
+      <p>La nave vuela hacia adelante de forma constante. Usa el joystick y mueve ligeramente el móvil para apuntar.</p>
       <div class="menu">
         <button class="btn primary" data-go="faction">Empezar</button>
         <button class="btn" data-go="faction" data-quick="1">Partida Rápida</button>
@@ -265,7 +263,7 @@ input[type=text]{width:100%;background:#0e1030;border:2px solid #000;color:var(-
       <div class="blk stage" id="stageShip"><canvas id="cvShip"></canvas></div>
       <div class="blk pane">
         <div class="row"><label>Casco</label><div class="hulls" id="hullList"></div></div>
-        <div class="row"><label>Rendimiento</label><div class="stats" id="statList"></div></div>
+        <div class="row"><label>Estadísticas</label><div class="stats" id="statList"></div></div>
         <button class="btn primary" data-go="mode">Continuar al despliegue</button>
       </div>
     </div>
@@ -287,7 +285,7 @@ input[type=text]{width:100%;background:#0e1030;border:2px solid #000;color:var(-
       <h2 id="rTitle" style="font-size:16px;margin-bottom:12px"></h2>
       <div class="menu" style="justify-content:center">
         <button class="btn primary" id="rAgain">Volver a jugar</button>
-        <button class="btn ghost" data-go="mode">Cambiar modo</button>
+        <button class="btn ghost" data-go="mode">Modos</button>
       </div>
     </div>
   </section>
@@ -308,9 +306,9 @@ const FACTIONS = {
 const FKEYS = ['krovax','zylith','mycor'];
 
 const HULLS = {
-  escarabajo:{ id:'escarabajo', name:'ESCARABAJO', role:'Equilibrada', base:{vel:28, giro:1.6, dano:12, cad:3.6, casco:130, escudo:60} },
-  martillo:{ id:'martillo', name:'MARTILLO', role:'Pesada', base:{vel:22, giro:1.2, dano:16, cad:2.4, casco:190, escudo:45} },
-  aguja:{ id:'aguja', name:'AGUJA', role:'Rápida', base:{vel:36, giro:2.0, dano:9, cad:5.0, casco:90, escudo:70} }
+  escarabajo:{ id:'escarabajo', name:'ESCARABAJO', role:'Equilibrada', base:{vel:32, giro:1.5, dano:12, cad:3.6, casco:130, escudo:60} },
+  martillo:{ id:'martillo', name:'MARTILLO', role:'Pesada', base:{vel:26, giro:1.15, dano:16, cad:2.4, casco:190, escudo:45} },
+  aguja:{ id:'aguja', name:'AGUJA', role:'Rápida', base:{vel:40, giro:1.85, dano:9, cad:5.0, casco:90, escudo:70} }
 };
 const HKEYS = ['escarabajo','martillo','aguja'];
 
@@ -319,9 +317,9 @@ const HELMS  = [0xdfe4f5,0xff6b2b,0x2fd4ff,0x8bf03a];
 const HELM_TYPES = [{id:0,n:'Abierto'},{id:1,n:'Integral'},{id:2,n:'Cresta'}];
 
 const MODES = [
-  {id:'historia', n:'Campaña', d:'Recoge 5 núcleos y abate al jefe.'},
+  {id:'historia', n:'Campaña', d:'Recoge 5 núcleos de cristal y abate al jefe.'},
   {id:'1v1', n:'Duelo 1v1', d:'Combate espacial directo.'},
-  {id:'2v2', n:'Escuadrón 2v2', d:'Vuela con un compañero.'}
+  {id:'2v2', n:'Escuadrón 2v2', d:'Vuela con un aliado.'}
 ];
 
 const S = { faction:null, pilot:{name:'PILOTO', skin:0, helm:0, helmType:1}, ship:{hull:'escarabajo'}, mode:'1v1', screen:'title' };
@@ -357,7 +355,7 @@ function shipStats(hullId, factionId){
   return s;
 }
 
-/* CONSTRUCTORES 3D (MORRO HACIA -Z) */
+/* 3D BUILDERS */
 function mat(c,emi){ return new THREE.MeshLambertMaterial({color:c, emissive:emi||0, emissiveIntensity:emi?0.8:0}); }
 function box(g,x,y,z,w,h,d,c,emi){
   const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d), mat(c,emi));
@@ -377,7 +375,7 @@ function buildHead(p, fid){
   return g;
 }
 
-// Las naves se construyen orientadas hacia -Z (hacia adelante por estándar Three.js)
+// Modelado con el morro apuntando al frente (-Z)
 function buildShip(hullId, fid, scale){
   const g=new THREE.Group(), f=FACTIONS[fid]||FACTIONS.zylith;
   const A=f.hex, B=f.hex2, C=f.hex3, GL=0x55d5ff;
@@ -438,7 +436,7 @@ function startShipPreview(){
   }
   PV_SHIP.pivot.clear();
   const sh=buildShip(S.ship.hull, S.faction, 1);
-  sh.rotation.y = Math.PI; // En el menú mira de frente
+  sh.rotation.y = Math.PI;
   PV_SHIP.pivot.add(sh);
 }
 
@@ -487,50 +485,146 @@ function renderModes(){
   MODES.forEach(m=>{
     const d=document.createElement('div'); d.className='blk mcard';
     d.innerHTML=`<h3>${m.n}</h3><p>${m.d}</p>`;
-    d.addEventListener('click',()=>{ S.mode=m.id; startBattle(); });
+    d.addEventListener('click',()=>{ S.mode=m.id; checkSensorPermission(); });
     el.appendChild(d);
   });
 }
 
 /* ============================================================
-   COMBATE CON JOYSTICK Y CÁMARA HIJA (NAVE SIEMPRE EN EL CENTRO)
+   GIROSCOPIO SUTIL DE ASISTENCIA (MICRO-INCLINACIÓN)
+============================================================ */
+const SUBTLE_GYRO = {
+  active:false,
+  baseBeta:0,
+  baseGamma:45,
+  x:0, // Ligero yaw
+  y:0  // Ligero pitch
+};
+
+function initSubtleSensors(){
+  if(window.DeviceOrientationEvent){
+    window.addEventListener('deviceorientation', e=>{
+      if(e.beta===null || e.gamma===null) return;
+      SUBTLE_GYRO.active=true;
+      const isLandscapeLeft = (window.orientation === 90);
+      const rawPitch = isLandscapeLeft ? e.gamma : -e.gamma;
+      const rawYaw   = isLandscapeLeft ? e.beta  : -e.beta;
+
+      const dPitch = rawPitch - SUBTLE_GYRO.baseGamma;
+      const dYaw   = rawYaw   - SUBTLE_GYRO.baseBeta;
+
+      // Micro-sensibilidad suave para dar sensación háptica sin quitar control al joystick
+      SUBTLE_GYRO.y = clamp(-dPitch * 0.035, -0.4, 0.4);
+      SUBTLE_GYRO.x = clamp(-dYaw   * 0.035, -0.4, 0.4);
+    }, false);
+  }
+}
+
+function checkSensorPermission(){
+  if(typeof DeviceOrientationEvent!=='undefined' && typeof DeviceOrientationEvent.requestPermission==='function'){
+    DeviceOrientationEvent.requestPermission()
+      .then(resp=>{ if(resp==='granted') initSubtleSensors(); startBattle(); })
+      .catch(()=>startBattle());
+  } else {
+    initSubtleSensors();
+    startBattle();
+  }
+}
+
+/* ============================================================
+   COMBATE, POLVO ESPACIAL (VELOCIDAD) Y ESTELAS
 ============================================================ */
 const G = {
   renderer:null, scene:null, cam:null, clock:null,
   player:null, actors:[], bullets:[], parts:[], pickups:[], markers:[],
   running:false, over:false, kills:0, cores:0, coresNeeded:5, bossUp:false,
   keys:{},
-  stick:{ x:0, y:0 }, // Ejes analógicos (-1 a 1)
+  stick:{ x:0, y:0 },
   btnShoot:false,
-  btnTurbo:false
+  btnTurbo:false,
+  // Sistema de partículas de velocidad relativa
+  dustMesh:null,
+  dustPositions:[],
+  exhaustTimer:0
 };
+
+// Partículas de polvo estelar / efecto de velocidad envolvente
+function buildSpaceDust(){
+  const count = 500;
+  const geom = new THREE.BufferGeometry();
+  const pos = new Float32Array(count * 3);
+  G.dustPositions = [];
+
+  for(let i=0; i<count; i++){
+    const x = rnd(-70, 70);
+    const y = rnd(-40, 40);
+    const z = rnd(-140, 40);
+    pos[i*3]   = x;
+    pos[i*3+1] = y;
+    pos[i*3+2] = z;
+    G.dustPositions.push({ x, y, z });
+  }
+
+  geom.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const mat = new THREE.PointsMaterial({
+    color: 0xcfe8ff,
+    size: 2.2,
+    transparent: true,
+    opacity: 0.8
+  });
+
+  G.dustMesh = new THREE.Points(geom, mat);
+  G.player.obj.add(G.dustMesh); // Va vinculado a la nave para crear ilusión de avance infinito
+}
+
+function updateSpaceDust(speedRatio, dt){
+  if(!G.dustMesh) return;
+  const posAttr = G.dustMesh.geometry.attributes.position;
+  const arr = posAttr.array;
+  const speed = 70 * speedRatio * dt;
+
+  for(let i=0; i<G.dustPositions.length; i++){
+    const p = G.dustPositions[i];
+    p.z += speed; // Vuelan hacia atrás relativo a la nave
+
+    if(p.z > 25){
+      p.z = -140;
+      p.x = rnd(-70, 70);
+      p.y = rnd(-40, 40);
+    }
+    arr[i*3]   = p.x;
+    arr[i*3+1] = p.y;
+    arr[i*3+2] = p.z;
+  }
+  posAttr.needsUpdate = true;
+}
 
 function buildSpaceWorld(){
   const sc=G.scene;
-  sc.background=new THREE.Color(0x060817);
-  sc.fog=new THREE.FogExp2(0x080a1c, 0.0015);
-  sc.add(new THREE.AmbientLight(0xb0b8e8, 1.0));
-  const sun=new THREE.DirectionalLight(0xfff0d0, 1.3); sun.position.set(-200,300,-200); sc.add(sun);
+  sc.background=new THREE.Color(0x040612);
+  sc.fog=new THREE.FogExp2(0x060817, 0.0012);
+  sc.add(new THREE.AmbientLight(0xa5b0e8, 1.0));
+  const sun=new THREE.DirectionalLight(0xffeedd, 1.4); sun.position.set(-200,300,-200); sc.add(sun);
 
-  // Estrellas
+  // Nebulosas lejanas
   const sg=new THREE.BufferGeometry(), pos=[];
-  for(let i=0;i<1500;i++){
-    const v=new THREE.Vector3(rnd(-1,1),rnd(-1,1),rnd(-1,1)).normalize().multiplyScalar(rnd(1000,1600));
+  for(let i=0;i<1800;i++){
+    const v=new THREE.Vector3(rnd(-1,1),rnd(-1,1),rnd(-1,1)).normalize().multiplyScalar(rnd(900,1600));
     pos.push(v.x,v.y,v.z);
   }
   sg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
   sc.add(new THREE.Points(sg, new THREE.PointsMaterial({color:0xffffff,size:3.5})));
 
   // Planeta
-  const planet=new THREE.Mesh(new THREE.SphereGeometry(220,16,12), new THREE.MeshLambertMaterial({color:0x274d6e}));
+  const planet=new THREE.Mesh(new THREE.SphereGeometry(220,16,12), new THREE.MeshLambertMaterial({color:0x22496b}));
   planet.position.set(-450,-120,-700); sc.add(planet);
 
   // Asteroides
   G.rocks=[];
   for(let i=0;i<32;i++){
     const g=new THREE.Group();
-    box(g,0,0,0,rnd(10,20),rnd(10,20),rnd(10,20),0x484e68);
-    const a=Math.random()*Math.PI*2, r=rnd(150,450);
+    box(g,0,0,0,rnd(10,22),rnd(10,22),rnd(10,22),0x454c69);
+    const a=Math.random()*Math.PI*2, r=rnd(160,500);
     g.position.set(Math.cos(a)*r, rnd(-80,80), Math.sin(a)*r);
     sc.add(g); G.rocks.push(g);
   }
@@ -561,18 +655,15 @@ function makeMarker(cls,lbl){
   return d;
 }
 
-// Disparos grandes, luminosos y hacia adelante (-Z)
-const BULLET_GEO = new THREE.BoxGeometry(1.2, 1.2, 7.0);
+const BULLET_GEO = new THREE.BoxGeometry(1.2, 1.2, 7.5);
 function fire(a){
   const dmg = a.stats.dano;
-  // Dirección de avance (-Z local)
   const dir = new THREE.Vector3(0,0,-1).applyQuaternion(a.obj.quaternion);
 
-  [-2.0, 2.0].forEach(sideOffset=>{
+  [-2.2, 2.2].forEach(sideOffset=>{
     const col = a.faction==='krovax'? 0xff6b2b : (a.faction==='mycor'? 0x8bf03a : 0x2fd4ff);
     const m = new THREE.Mesh(BULLET_GEO, new THREE.MeshBasicMaterial({color:col}));
     
-    // Salen de las alas hacia adelante
     const side = new THREE.Vector3(1,0,0).applyQuaternion(a.obj.quaternion).multiplyScalar(sideOffset);
     m.position.copy(a.obj.position).add(side).add(dir.clone().multiplyScalar(2.0));
     m.quaternion.copy(a.obj.quaternion);
@@ -580,7 +671,7 @@ function fire(a){
     G.scene.add(m);
     G.bullets.push({
       obj:m,
-      v:dir.clone().multiplyScalar(240),
+      v:dir.clone().multiplyScalar(250),
       life:2.5,
       dmg:dmg,
       team:a.team,
@@ -593,8 +684,24 @@ function burst(pos, color, n){
   for(let i=0;i<(n||12);i++){
     const m=new THREE.Mesh(new THREE.BoxGeometry(2.5,2.5,2.5), new THREE.MeshBasicMaterial({color}));
     m.position.copy(pos); G.scene.add(m);
-    G.parts.push({obj:m, v:new THREE.Vector3(rnd(-1,1),rnd(-1,1),rnd(-1,1)).normalize().multiplyScalar(rnd(15,40)), life:0.8});
+    G.parts.push({obj:m, v:new THREE.Vector3(rnd(-1,1),rnd(-1,1),rnd(-1,1)).normalize().multiplyScalar(rnd(15,45)), life:0.8});
   }
+}
+
+// Chispas de propulsión de motor
+function emitEngineParticles(shipObj, faction, isTurbo){
+  const col = FACTIONS[faction].hex3;
+  const back = new THREE.Vector3(0,0,1.8).applyQuaternion(shipObj.quaternion);
+  const pos = shipObj.position.clone().add(back);
+  const size = isTurbo ? 2.4 : 1.4;
+  const m = new THREE.Mesh(new THREE.BoxGeometry(size,size,size), new THREE.MeshBasicMaterial({color:col}));
+  m.position.copy(pos).add(new THREE.Vector3(rnd(-0.4,0.4), rnd(-0.2,0.2), rnd(-0.3,0.3)));
+  G.scene.add(m);
+  G.parts.push({
+    obj:m,
+    v:new THREE.Vector3(0,0,1).applyQuaternion(shipObj.quaternion).multiplyScalar(rnd(8,18)),
+    life:0.25
+  });
 }
 
 function damage(a, val){
@@ -617,29 +724,49 @@ function damage(a, val){
 
 function playerUpdate(a, dt){
   const k=G.keys;
-  let yaw = -G.stick.x;   // Stick horizontal gira la nave
-  let pitch = -G.stick.y; // Stick vertical sube / baja
+  
+  // 1. COMBINACIÓN DE JOYSTICK + MICRO-GIROSCOPIO SUTIL
+  let yaw = -G.stick.x + SUBTLE_GYRO.x;
+  let pitch = -G.stick.y + SUBTLE_GYRO.y;
 
-  // Soporte teclado para PC
   if(k['a']||k['arrowleft'])  yaw += 1;
   if(k['d']||k['arrowright']) yaw -= 1;
   if(k['w']||k['arrowup'])    pitch += 1;
   if(k['s']||k['arrowdown'])  pitch -= 1;
 
-  // Rotaciones directas y fluidas
+  // Rotaciones
   const rate = a.stats.giro * dt * 1.5;
   const qy = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0), yaw * rate);
   const qx = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1,0,0), pitch * rate);
   a.obj.quaternion.multiply(qy).multiply(qx);
 
-  // Avance frontal constante (-Z)
+  // 2. AVANCE CONTINUO AUTOMÁTICO (Velocidad de crucero constante)
   const boosting = G.btnTurbo || k['shift'];
-  const sp = a.speed * (boosting ? 1.9 : 1.0);
+  const speedRatio = boosting ? 2.2 : 1.0;
+  const currentSpeed = a.speed * speedRatio;
+  
   const fwd = new THREE.Vector3(0,0,-1).applyQuaternion(a.obj.quaternion);
-  a.obj.position.add(fwd.multiplyScalar(sp*dt));
+  a.obj.position.add(fwd.multiplyScalar(currentSpeed * dt));
 
-  // Alabeo visual de la nave
-  a.mesh.rotation.z = THREE.MathUtils.lerp(a.mesh.rotation.z, -yaw * 0.5, dt * 7);
+  // Alabeo estético
+  a.mesh.rotation.z = THREE.MathUtils.lerp(a.mesh.rotation.z, -yaw * 0.45, dt * 7);
+
+  // Actualizar partículas de polvo espacial según velocidad
+  updateSpaceDust(speedRatio, dt);
+
+  // Partículas de estela de motor
+  G.exhaustTimer -= dt;
+  if(G.exhaustTimer <= 0){
+    emitEngineParticles(a.obj, a.faction, boosting);
+    G.exhaustTimer = boosting ? 0.02 : 0.05;
+  }
+
+  // Efecto dinámico de cámara en Turbo (ligero retroceso y FOV)
+  if(boosting){
+    G.cam.position.z = THREE.MathUtils.lerp(G.cam.position.z, 16.5, dt * 6);
+  } else {
+    G.cam.position.z = THREE.MathUtils.lerp(G.cam.position.z, 14.2, dt * 6);
+  }
 
   // Disparo
   a.cool -= dt;
@@ -685,7 +812,6 @@ function startBattle(){
   G.renderer.setSize(innerWidth,innerHeight,false);
   G.scene=new THREE.Scene();
 
-  // Cámara con FOV amplio para vista panorámica apaisada
   G.cam=new THREE.PerspectiveCamera(54, innerWidth/innerHeight, 0.5, 3000);
   G.clock=new THREE.Clock();
   G.actors=[]; G.bullets=[]; G.parts=[]; G.pickups=[];
@@ -693,15 +819,16 @@ function startBattle(){
 
   buildSpaceWorld();
 
-  // 1. Crear jugador en el centro
+  // NAVE DEL JUGADOR
   G.player=makeActor({hull:S.ship.hull, faction:S.faction, pos:new THREE.Vector3(0,0,0), team:1, isPlayer:true});
 
-  // 2. FIJAR CÁMARA COMO HIJA DE LA NAVE:
-  // Siempre 3.8 unidades arriba y 14.5 unidades por detrás (+Z)
-  // Mirando directamente al frente por encima del morro hacia el retículo
-  G.cam.position.set(0, 3.8, 14.5);
-  G.cam.lookAt(0, 0.8, -30);
+  // CÁMARA HIJA EN 3ª PERSONA (Nave visible perfectamente abajo en el centro)
+  G.cam.position.set(0, 3.8, 14.2);
+  G.cam.lookAt(0, 0.9, -30);
   G.player.obj.add(G.cam);
+
+  // Inicializar polvo estelar de velocidad
+  buildSpaceDust();
 
   if(S.mode==='historia'){
     G.coresNeeded=5;
@@ -735,7 +862,7 @@ function frame(){
     if(a.dead) return;
     if(a.isPlayer) playerUpdate(a,dt);
     else {
-      // IA básica de persecución
+      // IA enemiga
       const toP=G.player.obj.position.clone().sub(a.obj.position);
       const mRot=new THREE.Matrix4().lookAt(a.obj.position, G.player.obj.position, new THREE.Vector3(0,1,0));
       a.obj.quaternion.slerp(new THREE.Quaternion().setFromRotationMatrix(mRot), dt*1.2);
@@ -776,7 +903,7 @@ function frame(){
     $('#shTxt').textContent=Math.max(0,Math.round(pl.shield));
   }
 
-  // Marcadores en pantalla
+  // Marcadores de objetivos en pantalla
   const v=new THREE.Vector3();
   G.actors.concat(G.pickups).forEach(item=>{
     const m=item.marker; if(!m) return;
@@ -807,14 +934,12 @@ function endBattle(win){
   }, 900);
 }
 
-/* ============================================================
-   CONTROL DEL JOYSTICK TÁCTIL (THUMBSTICK)
-============================================================ */
+/* JOYSTICK TÁCTIL (IZQUIERDA) */
 const stickArea = $('#stickArea');
 const stickKnob = $('#stickKnob');
 let touchId = null;
 let center = { x:0, y:0 };
-const MAX_RADIUS = 46;
+const MAX_RADIUS = 44;
 
 stickArea.addEventListener('touchstart', e=>{
   e.preventDefault();
@@ -863,14 +988,11 @@ function updateJoystick(clientX, clientY){
   }
 
   stickKnob.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
-  // Normalizar entre -1 y 1
   G.stick.x = dx / MAX_RADIUS;
   G.stick.y = dy / MAX_RADIUS;
 }
 
-/* ============================================================
-   BOTONES DE ACCIÓN (DERECHA)
-============================================================ */
+/* BOTONES ARCADE */
 function bindBtn(id, key){
   const el = $(id);
   const press = ()=>{ G[key] = true; el.classList.add('down'); };
